@@ -52,7 +52,7 @@
             height: 30px;
             background-color: #ffcc00;
             border-radius: 50%;
-            cursor: grab;
+            cursor: pointer;
         }
 
         .team1 {
@@ -86,11 +86,14 @@
     </div>
 
     <script>
-        // Make players draggable
+        // Make players draggable when clicked and held
         const players = document.querySelectorAll('.player');
 
         players.forEach(player => {
+            let isDragging = false;
+
             player.addEventListener('mousedown', (e) => {
+                isDragging = true;
                 const shiftX = e.clientX - player.getBoundingClientRect().left;
                 const shiftY = e.clientY - player.getBoundingClientRect().top;
 
@@ -100,15 +103,17 @@
                 }
 
                 function onMouseMove(event) {
-                    moveAt(event.pageX, event.pageY);
+                    if (isDragging) {
+                        moveAt(event.pageX, event.pageY);
+                    }
                 }
 
                 document.addEventListener('mousemove', onMouseMove);
 
-                player.addEventListener('mouseup', () => {
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
                     document.removeEventListener('mousemove', onMouseMove);
-                    player.onmouseup = null;
-                });
+                }, { once: true });
             });
 
             player.ondragstart = () => false;
@@ -116,4 +121,5 @@
     </script>
 </body>
 </html>
+
 
