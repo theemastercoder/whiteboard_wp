@@ -7,135 +7,298 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f8ff;
         }
-
         .tactic-board {
             position: relative;
-            width: 600px; /* Scaled down from 20m */
-            height: 450px; /* Scaled down from 15m */
+            width: 90%;
+            max-width: 800px;
+            aspect-ratio: 4 / 3;
             background-color: #add8e6;
             border: 2px solid #000;
+            margin-bottom: 20px;
+            cursor: crosshair;
         }
-
         .line {
             position: absolute;
             width: 100%;
-            height: 2px;
+            height: 0.5%;
             background-color: #000;
         }
-
-        .two-meter {
-            top: 60px; /* Scaled down from 2m */
-        }
-
-        .six-meter {
-            top: 180px; /* Scaled down from 6m */
-        }
-
+        .two-meter { top: 13%; }
+        .six-meter { top: 40%; }
         .goal {
             position: absolute;
-            width: 90px; /* Scaled down from 3m */
-            height: 48px; /* Scaled down from 1.6m */
+            width: 20%;
+            height: 7%;
             background-color: #ff4500;
-            top: -16px; /* Slightly comes out onto the court */
-            left: 255px; /* Centered horizontally */
+            top: -6%;
+            left: 40%;
         }
-
-        .player {
+        .player, .ball, .goalie {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: #ffcc00;
-            border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.2s;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
         }
-
-        .team1 {
-            background-color: #ffcc00;
+        .player {
+            width: 5%;
+            height: 5%;
+            border: 2px solid #000;
         }
-
-        .team2 {
-            background-color: #00bfff;
+        .team1 { background-color: #ffcc00; }
+        .team2 { background-color: #00bfff; }
+        .ball {
+            width: 3%;
+            height: 3%;
+            background-color: #ff4500;
+            border: 2px solid #000;
         }
-
-        .hovered {
-            background-color: #80ff80 !important; /* Light green when hovered */
+        .goalie {
+            width: 5%;
+            height: 5%;
+            background-color: #32cd32;
+            border: 2px solid #000;
         }
-
-        .dragging {
-            background-color: #40ff40 !important; /* Bright green when dragging */
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        #settingsTab {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            display: none;
+            width: 250px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .setting {
+            margin-bottom: 15px;
+        }
+        .setting label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .setting input[type="range"],
+        .setting input[type="color"] {
+            width: 100%;
+        }
+        .setting button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <div class="tactic-board">
+    <div class="tactic-board" id="tacticBoard">
+        <canvas id="drawingCanvas"></canvas>
         <div class="line two-meter"></div>
         <div class="line six-meter"></div>
         <div class="goal"></div>
-
-        <!-- Players -->
-        <div class="player team1" style="top: 100px; left: 100px;"></div>
-        <div class="player team1" style="top: 150px; left: 200px;"></div>
-        <div class="player team1" style="top: 200px; left: 300px;"></div>
-        <div class="player team1" style="top: 250px; left: 150px;"></div>
-        <div class="player team1" style="top: 300px; left: 250px;"></div>
-        <div class="player team1" style="top: 350px; left: 50px;"></div>
-
-        <div class="player team2" style="top: 100px; left: 400px;"></div>
-        <div class="player team2" style="top: 150px; left: 350px;"></div>
-        <div class="player team2" style="top: 200px; left: 250px;"></div>
-        <div class="player team2" style="top: 250px; left: 300px;"></div>
-        <div class="player team2" style="top: 300px; left: 350px;"></div>
+        <div class="player team1" data-start-top="13%" data-start-left="12%" style="top: 13%; left: 12%;"></div>
+        <div class="player team1" data-start-top="13%" data-start-left="88%" style="top: 13%; left: 88%;"></div>
+        <div class="player team1" data-start-top="35%" data-start-left="25%" style="top: 35%; left: 25%;"></div>
+        <div class="player team1" data-start-top="35%" data-start-left="75%" style="top: 35%; left: 75%;"></div>
+        <div class="player team1" data-start-top="45%" data-start-left="50%" style="top: 45%; left: 50%;"></div>
+        <div class="player team1" data-start-top="20%" data-start-left="50%" style="top: 20%; left: 50%;"></div>
+        <div class="player team2" data-start-top="13%" data-start-left="18%" style="top: 13%; left: 18%;"></div>
+        <div class="player team2" data-start-top="13%" data-start-left="82%" style="top: 13%; left: 82%;"></div>
+        <div class="player team2" data-start-top="32%" data-start-left="30%" style="top: 32%; left: 30%;"></div>
+        <div class="player team2" data-start-top="32%" data-start-left="70%" style="top: 32%; left: 70%;"></div>
+        <div class="player team2" data-start-top="38%" data-start-left="50%" style="top: 38%; left: 50%;"></div>
+        <div class="player team2" data-start-top="12%" data-start-left="50%" style="top: 12%; left: 50%;"></div>
+        <div class="ball" id="ball" data-start-top="48%" data-start-left="50%" style="top: 48%; left: 50%;"></div>
+        <div class="goalie" id="goalie" data-start-top="5%" data-start-left="50%" style="top: 5%; left: 50%;"></div>
     </div>
-
+    <button id="settingsButton">Settings</button>
+    <button id="resetButton">Reset Positions</button>
+    <div id="settingsTab">
+        <div class="setting">
+            <label for="colorPicker">Line Color</label>
+            <input type="color" id="colorPicker" value="#000000">
+        </div>
+        <div class="setting">
+            <label for="lineThickness">Line Thickness</label>
+            <input type="range" id="lineThickness" min="1" max="10" value="2">
+        </div>
+        <div class="setting">
+            <label for="drawingMode">Drawing Mode</label>
+            <select id="drawingMode">
+                <option value="freehand">Freehand</option>
+                <option value="straight">Straight Line</option>
+            </select>
+        </div>
+        <button id="closeSettings">Close Settings</button>
+    </div>
     <script>
-        const players = document.querySelectorAll('.player');
-        let draggedPlayer = null;
-        let offsetX = 0;
-        let offsetY = 0;
+        const elements = document.querySelectorAll('.player, .ball, .goalie');
+        const resetButton = document.getElementById('resetButton');
+        const settingsButton = document.getElementById('settingsButton');
+        const settingsTab = document.getElementById('settingsTab');
+        const closeSettingsButton = document.getElementById('closeSettings');
+        const colorPicker = document.getElementById('colorPicker');
+        const lineThicknessSlider = document.getElementById('lineThickness');
+        const drawingModeSelector = document.getElementById('drawingMode');
+        const tacticBoard = document.getElementById('tacticBoard');
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDraggingElement = false;
+        let drawingMode = 'freehand';
+        let lineColor = '#000000';
+        let lineThickness = 2;
+        let isDrawing = false;
+        let lastX = null, lastY = null;
+        let lines = [];
 
-        players.forEach(player => {
-            player.addEventListener('mousedown', (e) => {
-                const rect = player.getBoundingClientRect();
-                if (Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2)) <= rect.width / 2) {
-                    draggedPlayer = player;
-                    offsetX = e.clientX - rect.left;
-                    offsetY = e.clientY - rect.top;
-                    player.classList.add('dragging');
-                }
-            });
+        function resizeCanvas() {
+            canvas.width = tacticBoard.clientWidth;
+            canvas.height = tacticBoard.clientHeight;
+            redrawLines();
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-            player.addEventListener('mousemove', (e) => {
-                if (!draggedPlayer) {
-                    const rect = player.getBoundingClientRect();
-                    const isHovered = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2)) <= rect.width / 2;
-                    if (isHovered) {
-                        player.classList.add('hovered');
-                    } else {
-                        player.classList.remove('hovered');
-                    }
-                }
-            });
+        settingsButton.addEventListener('click', () => {
+            settingsTab.style.display = 'block';
         });
 
-        document.addEventListener('mousemove', (e) => {
-            if (draggedPlayer) {
-                draggedPlayer.style.left = (e.clientX - offsetX) + 'px';
-                draggedPlayer.style.top = (e.clientY - offsetY) + 'px';
+        closeSettingsButton.addEventListener('click', () => {
+            settingsTab.style.display = 'none';
+        });
+
+        colorPicker.addEventListener('input', (event) => {
+            lineColor = event.target.value;
+        });
+
+        lineThicknessSlider.addEventListener('input', (event) => {
+            lineThickness = event.target.value;
+        });
+
+        drawingModeSelector.addEventListener('change', (event) => {
+            drawingMode = event.target.value;
+        });
+
+        tacticBoard.addEventListener('mousedown', (event) => {
+            if (event.target.classList.contains('player') || event.target.classList.contains('ball') || event.target.classList.contains('goalie')) {
+                return;
+            }
+            isDrawing = true;
+            [lastX, lastY] = [event.offsetX, event.offsetY];
+        });
+
+        tacticBoard.addEventListener('mousemove', (event) => {
+            if (!isDrawing) return;
+
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = lineThickness;
+            ctx.lineCap = 'round';
+
+            if (drawingMode === 'freehand') {
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(event.offsetX, event.offsetY);
+                ctx.stroke();
+                [lastX, lastY] = [event.offsetX, event.offsetY];
+            } else if (drawingMode === 'straight') {
+                redrawLines();
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(event.offsetX, event.offsetY);
+                ctx.stroke();
             }
         });
 
-        document.addEventListener('mouseup', () => {
-            if (draggedPlayer) {
-                draggedPlayer.classList.remove('dragging');
-                draggedPlayer = null;
+        tacticBoard.addEventListener('mouseup', (event) => {
+            if (!isDrawing) return;
+            isDrawing = false;
+            if (drawingMode === 'straight') {
+                lines.push({
+                    startX: lastX,
+                    startY: lastY,
+                    endX: event.offsetX,
+                    endY: event.offsetY,
+                    color: lineColor,
+                    thickness: lineThickness
+                });
+                redrawLines();
             }
+        });
+
+        tacticBoard.addEventListener('mouseleave', () => {
+            isDrawing = false;
+        });
+
+        function redrawLines() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines.forEach(line => {
+                ctx.strokeStyle = line.color;
+                ctx.lineWidth = line.thickness;
+                ctx.beginPath();
+                ctx.moveTo(line.startX, line.startY);
+                ctx.lineTo(line.endX, line.endY);
+                ctx.stroke();
+            });
+        }
+
+        elements.forEach(element => {
+            element.addEventListener('mousedown', dragStart);
+        });
+
+        function dragStart(e) {
+            const target = e.target;
+            const startX = e.clientX - target.offsetLeft;
+            const startY = e.clientY - target.offsetTop;
+
+            function dragMove(e) {
+                const newX = e.clientX - startX;
+                const newY = e.clientY - startY;
+                target.style.left = `${newX / tacticBoard.clientWidth * 100}%`;
+                target.style.top = `${newY / tacticBoard.clientHeight * 100}%`;
+            }
+
+            function dragEnd() {
+                document.removeEventListener('mousemove', dragMove);
+                document.removeEventListener('mouseup', dragEnd);
+            }
+
+            document.addEventListener('mousemove', dragMove);
+            document.addEventListener('mouseup', dragEnd);
+        }
+
+        resetButton.addEventListener('click', () => {
+            elements.forEach(element => {
+                const startTop = element.getAttribute('data-start-top');
+                const startLeft = element.getAttribute('data-start-left');
+                element.style.top = startTop;
+                element.style.left = startLeft;
+            });
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines = [];
         });
     </script>
 </body>
