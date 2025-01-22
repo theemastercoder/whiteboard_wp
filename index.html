@@ -112,25 +112,31 @@
             height: 100%;
             pointer-events: none;
         }
+
         @media (max-width: 600px) {
     .player {
         width: 6.5%;  /* Increase the size of players */
         height: 6.5%;
+        border: 1px solid #000;
     }
 
     .ball {
         width: 4%;  /* Increase ball size */
         height: 4%;
+        border: 1px solid #000;
     }
 
     .goalie {
         width: 6.5%;  /* Increase goalie size */
         height: 6.5%;
+        
+        border: 1px solid #000;
     }
 
-    
 
 
+   
+}
     </style>
 </head>
 <body>
@@ -152,7 +158,7 @@
         <div class="player team2" data-start-top="38%" data-start-left="50%" style="top: 38%; left: 50%;"></div>
         <div class="player team2" data-start-top="12%" data-start-left="50%" style="top: 12%; left: 50%;"></div>
         <div class="ball" id="ball" data-start-top="48%" data-start-left="50%" style="top: 48%; left: 50%;"></div>
-        <div class="goalie" id="goalie" data-start-top="5%" data-start-left="50%" style="top: 5%; left: 50%;"></div>
+        <div class="goalie" id="goalie" data-start-top="5%" data-start-left="50%" style="top: 0%; left: 50%;"></div>
     </div>
     <button id="settingsButton">Settings</button>
     <button id="resetButton">Reset Positions</button>
