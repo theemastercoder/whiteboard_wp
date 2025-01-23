@@ -17,7 +17,7 @@
         .tactic-board {
             position: relative;
             width: 90%;
-            max-width: 730px;
+            max-width: 900px;
             aspect-ratio: 4 / 3;
             background-color: #add8e6;
             border: 2px solid #000;
@@ -89,6 +89,11 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
+        #buttonContainer {
+    display: flex;         
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 10px;             /* Optional: adds space between buttons */
+}
         .setting {
             margin-bottom: 15px;
         }
@@ -178,10 +183,11 @@
         <div class="ball" id="ball" data-start-top="48%" data-start-left="50%" data-start-top2="40%" data-start-left2="40%" style="top: 48%; left: 50%;"></div>
         <div class="goalie" id="goalie" data-start-top="0%" data-start-left="50%" data-start-top2="0%" data-start-left2="50%" style="top: 0%; left: 50%;"></div>
     </div>
-    <button id="settingsButton">Settings</button>
-    <button id="sixOnSixButton">6-on-6 Play</button>
-
+    <div id="buttonContainer">
+        <button id="settingsButton">Settings</button>
+        <button id="sixOnSixButton">6-on-6 Play</button>
         <button id="sixOnFiveButton">6-on-5 Play</button>
+    </div>
        
 
     <div id="settingsTab">
@@ -202,9 +208,7 @@
         </div>
         <button id="closeSettings">Close Settings</button>
     </div>
-    <div id="positionDisplay">
-        Player positions will be shown here.
-    </div>
+    
     <script>
 const team2Players = document.querySelectorAll('.player.team2');
 const elements = document.querySelectorAll('.player, .ball, .goalie');
@@ -226,42 +230,7 @@ let isDrawing = false;
 let lastX = null, lastY = null;
 let lines = [];
 
-// Select all player elements
-const players = document.querySelectorAll('.player');
- // Assuming this is the container for the players
 
-// Function to get the current position of a player
-function getCurrentPosition(player) {
-    const rect = player.getBoundingClientRect();
-    
-    // Normalize the positions to percentages based on the tacticBoard container
-    const containerRect = tacticBoard.getBoundingClientRect();
-    
-    return {
-        top: (rect.top - containerRect.top) / containerRect.height * 100,  // Percentage of the height
-        left: (rect.left - containerRect.left) / containerRect.width * 100  // Percentage of the width
-    };
-}
-
-// Function to update the displayed player positions
-function updatePlayerPositions() {
-    let positionText = 'Player positions:\n'; // Initialize the text
-
-    players.forEach((player, index) => {
-        const currentPosition = getCurrentPosition(player);
-        positionText += `player${index}: Top: ${currentPosition.top.toFixed(2)}%, Left: ${currentPosition.left.toFixed(2)}%\n`;
-    });
-
-    // Update the positionDisplay div
-    const positionDisplay = document.getElementById('positionDisplay');
-    positionDisplay.textContent = positionText;
-
-    // Request the next frame to continuously update positions
-    requestAnimationFrame(updatePlayerPositions);
-}
-
-// Call updatePlayerPositions to start the continuous updates
-updatePlayerPositions();
 
 
 
