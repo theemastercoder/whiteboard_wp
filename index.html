@@ -410,7 +410,7 @@
         let movement = [];
 
 
-        startRecording.addEventListener('click', () => {
+    startRecording.addEventListener('click', () => {
     isRecording = true;
     startTime = Date.now();
     movements = [];
@@ -576,9 +576,12 @@ restartButton.addEventListener('click', () => {
     restartButton.disabled = true;
 });
 
-        // Select all player elements
-        const players = document.querySelectorAll('.player');
-        // Assuming this is the container for the players
+const players = document.querySelectorAll('.player');
+players.forEach((player, index) => {
+    player.id = `player-${index + 1}`; // Assign IDs like player-1, player-2, etc.
+});
+        
+
 
         // Function to get the current position of a player
         function getCurrentPosition(player) {
@@ -602,6 +605,17 @@ restartButton.addEventListener('click', () => {
                 positionText += `player${index}: Top: ${currentPosition.top.toFixed(2)}%, Left: ${currentPosition.left.toFixed(2)}%\n`;
             });
 
+            if (isRecording) {
+            const currentTime = Date.now() - startTime;
+            const playerPosition = {
+                id: player.id,
+                top: currentPosition.top,
+                left: currentPosition.left,
+                time: currentTime
+            };
+            movements.push(playerPosition);
+            timeSlider.max = Math.max(timeSlider.max, currentTime);
+        }
             // Update the positionDisplay div
 
             posTab.textContent = positionText;
