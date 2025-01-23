@@ -48,20 +48,20 @@
         }
         .player {
             width: 5%;
-            height: 5%;
+            height: 6%;
             border: 2px solid #000;
         }
         .team1 { background-color: #ffcc00; }
         .team2 { background-color: #00bfff; }
         .ball {
             width: 3%;
-            height: 3%;
+            height: 3.5%;
             background-color: #ff4500;
             border: 2px solid #000;
         }
         .goalie {
             width: 5%;
-            height: 5%;
+            height: 6%;
             background-color: #32cd32;
             border: 2px solid #000;
         }
@@ -113,22 +113,38 @@
             pointer-events: none;
         }
 
+        #positionDisplay {
+    position: fixed;
+    bottom: 200px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: #333;
+    max-width: 690px; /* To prevent the text from stretching too far */
+     /* In case the text is too long */
+    z-index: 9999; /* Ensure it appears above other content */
+}
+
         @media (max-width: 600px) {
     .player {
-        width: 7%;  /* Increase the size of players */
-        height: 7%;
+        width: 6.5%;  /* Increase the size of players */
+        height: 7.5%;
         border: 1px solid #000;
     }
 
     .ball {
-        width: 4.5%;  /* Increase ball size */
-        height: 4.5%;
+        width: 4%;  /* Increase ball size */
+        height: 5%;
         border: 1px solid #000;
     }
 
     .goalie {
-        width: 7%;  /* Increase goalie size */
-        height: 7%;
+        width: 6.5%;  /* Increase goalie size */
+        height: 7.5%;
         
         border: 1px solid #000;
     }
@@ -145,23 +161,29 @@
         <div class="line two-meter"></div>
         <div class="line six-meter"></div>
         <div class="goal"></div>
-        <div class="player team1" data-start-top="13%" data-start-left="12%" style="top: 13%; left: 12%;"></div>
-        <div class="player team1" data-start-top="13%" data-start-left="88%" style="top: 13%; left: 88%;"></div>
-        <div class="player team1" data-start-top="35%" data-start-left="25%" style="top: 35%; left: 25%;"></div>
-        <div class="player team1" data-start-top="35%" data-start-left="75%" style="top: 35%; left: 75%;"></div>
-        <div class="player team1" data-start-top="45%" data-start-left="50%" style="top: 45%; left: 50%;"></div>
-        <div class="player team1" data-start-top="20%" data-start-left="50%" style="top: 20%; left: 50%;"></div>
-        <div class="player team2" data-start-top="13%" data-start-left="18%" style="top: 13%; left: 18%;"></div>
-        <div class="player team2" data-start-top="13%" data-start-left="82%" style="top: 13%; left: 82%;"></div>
-        <div class="player team2" data-start-top="32%" data-start-left="30%" style="top: 32%; left: 30%;"></div>
-        <div class="player team2" data-start-top="32%" data-start-left="70%" style="top: 32%; left: 70%;"></div>
-        <div class="player team2" data-start-top="38%" data-start-left="50%" style="top: 38%; left: 50%;"></div>
-        <div class="player team2" data-start-top="12%" data-start-left="50%" style="top: 12%; left: 50%;"></div>
-        <div class="ball" id="ball" data-start-top="48%" data-start-left="50%" style="top: 48%; left: 50%;"></div>
-        <div class="goalie" id="goalie" data-start-top="5%" data-start-left="50%" style="top: 0%; left: 50%;"></div>
+        <div class="player team1" data-start-top="13%" data-start-left="12%" data-start-top2="11.28%" data-start-left2="57.62%" style="top: 13%; left: 12%;"></div>
+<div class="player team1" data-start-top="13%" data-start-left="88%" data-start-top2="11.77%" data-start-left2="15.49%" style="top: 13%; left: 88%;"></div>
+<div class="player team1" data-start-top="35%" data-start-left="25%" data-start-top2="36.78%" data-start-left2="37.23%" style="top: 35%; left: 25%;"></div>
+<div class="player team1" data-start-top="35%" data-start-left="75%" data-start-top2="11.17%" data-start-left2="79.06%" style="top: 35%; left: 75%;"></div>
+<div class="player team1" data-start-top="45%" data-start-left="50%" data-start-top2="12.49%" data-start-left2="38.14%" style="top: 45%; left: 50%;"></div>
+<div class="player team1" data-start-top="20%" data-start-left="50%" data-start-top2="37.18%" data-start-left2="58.08%" style="top: 20%; left: 50%;"></div>
+
+<div id="remove" class="player team2" data-start-top="13%" data-start-left="18%" data-start-top2="11.57%" data-start-left2="47.27%" style="top: 13%; left: 18%;"></div>
+<div class="player team2" data-start-top="13%" data-start-left="82%" data-start-top2="11.57%" data-start-left2="47.27%" style="top: 13%; left: 82%;"></div>
+<div class="player team2" data-start-top="32%" data-start-left="30%" data-start-top2="12.16%" data-start-left2="32.57%" style="top: 32%; left: 30%;"></div>
+<div class="player team2" data-start-top="32%" data-start-left="70%" data-start-top2="17.31%" data-start-left2="57.67%" style="top: 32%; left: 70%;"></div>
+<div class="player team2" data-start-top="38%" data-start-left="50%" data-start-top2="11.37%" data-start-left2="63.61%" style="top: 38%; left: 50%;"></div>
+<div class="player team2" data-start-top="12%" data-start-left="50%" data-start-top2="19.68%" data-start-left2="37.62%" style="top: 12%; left: 50%;"></div>
+
+        <div class="ball" id="ball" data-start-top="48%" data-start-left="50%" data-start-top2="40%" data-start-left2="40%" style="top: 48%; left: 50%;"></div>
+        <div class="goalie" id="goalie" data-start-top="0%" data-start-left="50%" data-start-top2="0%" data-start-left2="50%" style="top: 0%; left: 50%;"></div>
     </div>
     <button id="settingsButton">Settings</button>
-    <button id="resetButton">Reset Positions</button>
+    <button id="sixOnSixButton">6-on-6 Play</button>
+
+        <button id="sixOnFiveButton">6-on-5 Play</button>
+       
+
     <div id="settingsTab">
         <div class="setting">
             <label for="colorPicker">Line Color</label>
@@ -180,8 +202,11 @@
         </div>
         <button id="closeSettings">Close Settings</button>
     </div>
+    <div id="positionDisplay">
+        Player positions will be shown here.
+    </div>
     <script>
-
+const team2Players = document.querySelectorAll('.player.team2');
 const elements = document.querySelectorAll('.player, .ball, .goalie');
 const resetButton = document.getElementById('resetButton');
 const settingsButton = document.getElementById('settingsButton');
@@ -200,6 +225,81 @@ let lineThickness = 2;
 let isDrawing = false;
 let lastX = null, lastY = null;
 let lines = [];
+
+// Select all player elements
+const players = document.querySelectorAll('.player');
+ // Assuming this is the container for the players
+
+// Function to get the current position of a player
+function getCurrentPosition(player) {
+    const rect = player.getBoundingClientRect();
+    
+    // Normalize the positions to percentages based on the tacticBoard container
+    const containerRect = tacticBoard.getBoundingClientRect();
+    
+    return {
+        top: (rect.top - containerRect.top) / containerRect.height * 100,  // Percentage of the height
+        left: (rect.left - containerRect.left) / containerRect.width * 100  // Percentage of the width
+    };
+}
+
+// Function to update the displayed player positions
+function updatePlayerPositions() {
+    let positionText = 'Player positions:\n'; // Initialize the text
+
+    players.forEach((player, index) => {
+        const currentPosition = getCurrentPosition(player);
+        positionText += `player${index}: Top: ${currentPosition.top.toFixed(2)}%, Left: ${currentPosition.left.toFixed(2)}%\n`;
+    });
+
+    // Update the positionDisplay div
+    const positionDisplay = document.getElementById('positionDisplay');
+    positionDisplay.textContent = positionText;
+
+    // Request the next frame to continuously update positions
+    requestAnimationFrame(updatePlayerPositions);
+}
+
+// Call updatePlayerPositions to start the continuous updates
+updatePlayerPositions();
+
+
+
+/// Reference the "6-on-5 Play" button
+const sixOnFiveButton = document.getElementById('sixOnFiveButton');
+
+sixOnFiveButton.addEventListener('click', () => {
+    // Eject one player from team2 (example: first player of team2)
+    if (team2Players.length > 0) {
+    const firstPlayer = team2Players[0];
+    firstPlayer.style.opacity = 0; // Hide the player
+}
+
+    // Restore the positions of all players (including team1 and team2)
+    elements.forEach(element => {
+        // Fetch the new starting positions from the data attributes for the '6-on-5' play
+        const startTop2 = element.getAttribute('data-start-top2');
+        const startLeft2 = element.getAttribute('data-start-left2');
+        
+        if (startTop2 && startLeft2) {
+            // Set the positions based on the new data attributes
+            element.style.top = startTop2;
+            element.style.left = startLeft2;
+            element.style.display = ''; // Ensure element is visible if hidden
+        }
+    });
+
+    // Clear the canvas for new tactical drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    lines = []; // Reset the lines array
+});
+
+
+
+
+
+
+
 
 function resizeCanvas() {
     canvas.width = tacticBoard.clientWidth;
@@ -407,14 +507,27 @@ function dragStartTouch(e) {
     document.addEventListener('touchend', dragEndTouch);
 }
 
-// Reset button functionality
-resetButton.addEventListener('click', () => {
+
+// Rename and reference the button
+const sixOnSixButton = document.getElementById('sixOnSixButton'); // Use the existing button
+
+// Modify the "6-on-6" button functionality
+sixOnSixButton.addEventListener('click', () => {
     elements.forEach(element => {
+        // Restore the positions from the data attributes
         const startTop = element.getAttribute('data-start-top');
         const startLeft = element.getAttribute('data-start-left');
-        element.style.top = startTop;
-        element.style.left = startLeft;
+        
+        if (startTop && startLeft) {
+            element.style.top = startTop;
+            element.style.left = startLeft;
+        }
+
+        // Ensure all players (even the previously hidden ones) are visible
+        element.style.opacity = 1;
     });
+
+    // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     lines = [];
 });
@@ -422,3 +535,4 @@ resetButton.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
