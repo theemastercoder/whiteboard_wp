@@ -262,6 +262,7 @@
 </head>
 
 <body>
+    
     <div class="tactic-board" id="tacticBoard">
         <canvas id="recordingArea"></canvas>
         <canvas id="drawingCanvas"></canvas>
@@ -300,6 +301,7 @@
         <div class="goalie" id="goalie" data-start-top="0%" data-start-left="50%" data-start-top2="0%"
             data-start-left2="50%" style="top: 0%; left: 50%;"></div>
     </div>
+    
     <div id="buttonContainer">
         <button id="settingsButton">Settings</button>
         <button id="sixOnSixButton">6-on-6 Play</button>
@@ -370,11 +372,11 @@
 
         posTab.style.display = 'none';
         posExit.style.display = 'none';
+        const recordButton = document.getElementById('recordButton');
 
-
-        const recordCanvas = document.getElementById('recordingArea');
+      const recordCanvas = document.getElementById('recordingArea');
 const ctx2 = recordCanvas.getContext('2d');
-const recordButton = document.getElementById('recordButton');
+
 
 // Set canvas size to match tactic board size
 recordCanvas.width = tacticBoard.offsetWidth;
@@ -383,10 +385,132 @@ recordCanvas.height = tacticBoard.offsetHeight;
 let recordedChunks = [];
 let mediaRecorder;
 
+function drawTacticBoardOnCanvas() {
+    ctx2.clearRect(0, 0, recordCanvas.width, recordCanvas.height);
+    
+    // Draw the pool
+    ctx2.fillStyle = '#add8e6';
+    ctx2.fillRect(0, 0, recordCanvas.width, recordCanvas.height);
+    
+    // Draw the 2m line
+    ctx2.beginPath();
+    ctx2.moveTo(0, recordCanvas.height * 0.13);
+    ctx2.lineTo(recordCanvas.width, recordCanvas.height * 0.13);
+    ctx2.strokeStyle = '#000';
+    ctx2.stroke();
+    
+    // Draw the 6m line
+    ctx2.beginPath();
+    ctx2.moveTo(0, recordCanvas.height * 0.40);
+    ctx2.lineTo(recordCanvas.width, recordCanvas.height * 0.40);
+    ctx2.stroke();
+    
+    // Draw the goal
+    ctx2.fillStyle = '#ff4500';
+    ctx2.fillRect(recordCanvas.width * 0.4, -recordCanvas.height * 0.06, recordCanvas.width * 0.2, recordCanvas.height * 0.07);
+    
+    // Draw players
+    players.forEach((player, index,ball) => {
+        const position = getCurrentPosition(player);
+        ctx2.beginPath();
+        ctx2.arc((position.left * recordCanvas.width / 100)+17, (position.top * recordCanvas.height / 100)+17, recordCanvas.width * 0.025, 0, 2 * Math.PI);
+        ctx2.fillStyle = player.classList.contains('team1') ? '#ffcc00' : '#00bfff';
+        ctx2.fill();
+        ctx2.stroke();
+        const ballId = ball.id; // Get the ID of the ball
+            // Extract the number after 'ball-'
+
+            // Set the text of the ball to its number
+            
+        // Draw player number
+        ctx2.fillStyle = '#000';
+        ctx2.fillStyle = '#000';
+        ctx2.font = '20px Arial';
+        ctx2.textAlign = 'center';
+        ctx2.textBaseline = 'middle';
+        ctx2.fillText(player.id, (position.left * recordCanvas.width / 100)+17, (position.top * recordCanvas.height / 100)+17);
+    });
+    
+    // Draw ball
+    const ballPosition = getCurrentPosition(document.getElementById('ball'));
+    ctx2.beginPath();
+    ctx2.arc((ballPosition.left * recordCanvas.width / 100)+17, (ballPosition.top * recordCanvas.height / 100)-17, recordCanvas.width * 0.015, 0, 2 * Math.PI);
+    ctx2.fillStyle = '#ff4500';
+    ctx2.fill();
+    ctx2.stroke();
+    
+    // Draw goalie
+    const goaliePosition = getCurrentPosition(document.getElementById('goalie'));
+    ctx2.beginPath();
+    ctx2.arc(goaliePosition.left * recordCanvas.width / 100, goaliePosition.top * recordCanvas.height / 100, recordCanvas.width * 0.025, 0, 2 * Math.PI);
+    ctx2.fillStyle = '#32cd32';
+    ctx2.fill();
+    ctx2.stroke();
+}
+
 recordButton.addEventListener('click', () => {
     if (!mediaRecorder || mediaRecorder.state === 'inactive') {
-        recordedChunks = []; // Clear previous chunks
-        const stream = recordCanvas.captureStream(30); // Capture at 30 FPS
+        drawTacticBoardOnCanvas(); // Draw initial state
+        const stream = recordCanvas.captureStream(15);
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+
+        mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+                recordedChunks.push(event.data);
+            }
+        };
+
+        mediaRecorder.onstart = () => {
+            
+            captureFrame();
+        };
+
+        function captureFrame(timestamp) {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+        drawTacticBoardOnCanvas();
+        animationFrameId = requestAnimationFrame(captureFrame);
+    }
+}
+
+        mediaRecorder.onstop = () => {
+            cancelAnimationFrame(animationFrameId);
+            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'tactic_board_recording.webm';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+            }, 100);
+            recordedChunks = [];
+
+        };
+        mediaRecorder.start(1000);
+        
+        recordButton.textContent = 'Stop Recording';
+    } else {
+        mediaRecorder.stop();
+        recordButton.textContent = 'Start Recording';
+    }
+});
+
+
+
+
+
+
+
+
+/*
+recordButton.addEventListener('click', () => {
+    if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+        recordedChunks = [];
+        const stream = tacticBoard.captureStream(30); // Capture at 30 FPS
         mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
         mediaRecorder.ondataavailable = (event) => {
@@ -417,8 +541,7 @@ recordButton.addEventListener('click', () => {
         recordButton.textContent = 'Start Recording';
     }
 });
-
-
+*/
         // Add the event listener once
         posExit.addEventListener('click', () => {
             posTab.style.display = 'none';
