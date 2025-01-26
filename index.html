@@ -1,7 +1,24 @@
-.step-block {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Polo Tactic Board Pro</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+        .step-block {
     position: relative;
     min-width: 150px; /* Wider for better spacing */
-    padding: 15px; /* More padding for better spacing */
+    padding: 1px; /* More padding for better spacing */
     background: #ffffff; /* White background for contrast */
     border: 1px solid #ddd; /* Subtle border */
     border-radius: 10px; /* Rounded corners */
@@ -64,3 +81,517 @@
     transform: scale(1.05); /* Slight zoom on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
+
+        .tactic-board {
+            position: relative;
+            width: 90%;
+            max-width: 730px;
+            aspect-ratio: 4 / 3;
+            background-color: #add8e6;
+            border: 2px solid #000;
+            margin-bottom: 20px;
+            cursor: crosshair;
+        }
+
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 0.5%;
+            background-color: #000;
+        }
+
+        .two-meter {
+            top: 13%;
+        }
+
+        .six-meter {
+            top: 40%;
+        }
+
+        .goal {
+            position: absolute;
+            width: 20%;
+            height: 7%;
+            background-color: #ff4500;
+            top: -6%;
+            left: 40%;
+        }
+
+        .player,
+        .ball,
+        .goalie {
+            position: absolute;
+            cursor: pointer;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+            transition: all 0s none;
+        }
+
+        .player {
+            width: 5%;
+            height: 6%;
+            border: 2px solid #000;
+        }
+
+        .team1 {
+            background-color: #ffcc00;
+        }
+
+        .team2 {
+            background-color: #00bfff;
+        }
+
+        .ball {
+            width: 3%;
+            height: 3.5%;
+            background-color: #ff4500;
+            border: 2px solid #000;
+        }
+
+        .goalie {
+            width: 5%;
+            height: 6%;
+            background-color: #32cd32;
+            border: 2px solid #000;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .timeline {
+            width: 90%;
+            max-width: 730px;
+            height: 100px;
+            overflow-x: auto;
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+  
+        .step-controls {
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            display: none;
+            gap: 2px;
+        }
+
+        .step-block:hover .step-controls {
+            display: flex;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        #positionEditor {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .position-edit {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .position-edit input {
+            width: 70px;
+            padding: 3px;
+        }
+        .step-previews {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 730px;
+        }
+
+        .step-preview {
+            position: relative;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .step-preview img {
+            width: 100%;
+            height: auto;
+        }
+
+        .edit-frame {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: white;
+            z-index: 1001;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .edit-frame-content {
+            width: 100%;
+            height: calc(100% - 60px);
+            overflow: auto;
+        }
+
+        .edit-controls {
+            padding: 10px;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    </style>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="tactic-board" id="tacticBoard">
+        <div class="line two-meter"></div>
+        <div class="line six-meter"></div>
+        <div class="goal"></div>
+        
+        <!-- Team 1 Players -->
+        <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;">1</div>
+        <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;">2</div>
+        <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;">3</div>
+        <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;">4</div>
+        <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;">5</div>
+        <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;">6</div>
+        
+        <!-- Team 2 Players -->
+        <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;">1</div>
+        <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;">2</div>
+        <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;">3</div>
+        <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;">4</div>
+        <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;">5</div>
+        <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;">6</div>
+        
+        <!-- Ball and Goalie -->
+        <div id="ball" class="ball" style="top: 48%; left: 50%;"></div>
+        <div id="goalie" class="goalie" style="top: 0%; left: 50%;">G</div>
+    </div>
+
+    <div class="controls">
+        <button id="addstep">➕ Add Step</button>
+        <button id="playAnimationButton">▶️ Play</button>
+        <button id="savePlay">💾 Save</button>
+        <button id="loadPlay">📂 Load</button>
+        <div class="speed-control">
+            <label>Speed:</label>
+            <input type="range" id="animationSpeed" min="0.5" max="3" step="0.5" value="1">
+            <span id="speedValue">1x</span>
+        </div>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+
+     <div class="step-previews" id="stepPreviews"></div>
+    
+    <div class="edit-frame" id="editFrame">
+        <div class="edit-frame-content" id="editFrameContent"></div>
+        <div class="edit-controls">
+            <button onclick="saveStepEdit()">✅ Done</button>
+            <button onclick="cancelStepEdit()">❌ Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        const elements = document.querySelectorAll('.player, .ball, .goalie');
+        let steps = [];
+        let isAnimating = false;
+        let animationSpeed = 1;
+        let editingStepIndex = -1;
+
+        // Speed Control
+        document.getElementById('animationSpeed').addEventListener('input', (e) => {
+            animationSpeed = e.target.value;
+            document.getElementById('speedValue').textContent = `${animationSpeed}x`;
+        });
+
+        // Step Management
+        document.getElementById('addstep').addEventListener('click', captureStep);
+        
+        function captureStep() {
+            const stepData = {
+                id: steps.length + 1,
+                name: `Step ${steps.length + 1}`,
+                positions: {},
+                duration: 1
+            };
+
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const containerRect = document.getElementById('tacticBoard').getBoundingClientRect();
+                stepData.positions[element.id] = {
+                    top: ((rect.top - containerRect.top) / containerRect.height * 100).toFixed(2),
+                    left: ((rect.left - containerRect.left) / containerRect.width * 100).toFixed(2)
+                };
+            });
+
+            steps.push(stepData);
+            updateTimeline();
+        }
+
+
+
+        // Step Editing
+        function editStep(index) {
+            editingStepIndex = index;
+            const step = steps[index];
+            const modal = document.getElementById('editModal');
+            document.getElementById('stepTitle').textContent = step.name;
+            
+            const editor = document.getElementById('positionEditor');
+            editor.innerHTML = '';
+            Object.entries(step.positions).forEach(([id, pos]) => {
+                editor.innerHTML += `
+                    <div class="position-edit">
+                        <label>${id}:</label>
+                        <input type="number" data-id="${id}" data-axis="top" value="${pos.top}" step="0.1">
+                        <input type="number" data-id="${id}" data-axis="left" value="${pos.left}" step="0.1">
+                    </div>
+                `;
+            });
+            
+            modal.style.display = 'block';
+        }
+
+        function saveEditedStep() {
+            const inputs = document.querySelectorAll('#positionEditor input');
+            inputs.forEach(input => {
+                const id = input.dataset.id;
+                const axis = input.dataset.axis;
+                steps[editingStepIndex].positions[id][axis] = input.value;
+            });
+            updateTimeline();
+            closeModal();
+            jumpToStep(editingStepIndex);
+        }
+
+        function deleteStep(index) {
+            steps.splice(index, 1);
+            updateTimeline();
+        }
+
+        // Save/Load System
+        document.getElementById('savePlay').addEventListener('click', () => {
+            const data = JSON.stringify(steps);
+            localStorage.setItem('savedPlay', data);
+            alert('Play saved successfully!');
+        });
+
+        document.getElementById('loadPlay').addEventListener('click', () => {
+            const data = localStorage.getItem('savedPlay');
+            if(data) {
+                steps = JSON.parse(data);
+                updateTimeline();
+                alert('Play loaded successfully!');
+            } else {
+                alert('No saved play found!');
+            }
+        });
+
+        // Animation System
+        document.getElementById('playAnimationButton').addEventListener('click', async () => {
+            if (!isAnimating && steps.length > 1) {
+                isAnimating = true;
+                try {
+                    for (let i = 0; i < steps.length - 1; i++) {
+                        const currentStep = steps[i];
+                        const nextStep = steps[i + 1];
+                        
+                        // Jump to current step without animation
+                        elements.forEach(element => {
+                            const pos = currentStep.positions[element.id];
+                            element.style.transition = 'none';
+                            element.style.top = `${pos.top}%`;
+                            element.style.left = `${pos.left}%`;
+                        });
+                        
+                        // Wait for frame update
+                        await new Promise(resolve => requestAnimationFrame(resolve));
+                        
+                        // Animate to next step
+                        elements.forEach(element => {
+                            const targetPos = nextStep.positions[element.id];
+                            element.style.transition = `all ${currentStep.duration / animationSpeed}s ease-in-out`;
+                            element.style.top = `${targetPos.top}%`;
+                            element.style.left = `${targetPos.left}%`;
+                        });
+
+                        await new Promise(resolve => 
+                            setTimeout(resolve, currentStep.duration * 1000 / animationSpeed)
+                        );
+                    }
+                } finally {
+                    isAnimating = false;
+                }
+            }
+        });
+
+        // Jump to Step
+        function jumpToStep(index) {
+            const step = steps[index];
+            elements.forEach(element => {
+                const pos = step.positions[element.id];
+                element.style.transition = 'none';
+                element.style.top = `${pos.top}%`;
+                element.style.left = `${pos.left}%`;
+            });
+        }
+
+        // Modal Handling
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // Draggable Functionality
+        elements.forEach(element => {
+            element.addEventListener('mousedown', startDrag);
+        });
+
+        function startDrag(e) {
+            e.preventDefault();
+            const element = e.target;
+            const startX = e.clientX - element.offsetLeft;
+            const startY = e.clientY - element.offsetTop;
+
+            function drag(e) {
+                const boardRect = document.getElementById('tacticBoard').getBoundingClientRect();
+                const newX = (e.clientX - startX) / boardRect.width * 100;
+                const newY = (e.clientY - startY) / boardRect.height * 100;
+                
+                element.style.left = `${Math.max(0, Math.min(100, newX))}%`;
+                element.style.top = `${Math.max(0, Math.min(100, newY))}%`;
+            }
+
+            function stopDrag() {
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+        }
+
+        // Modify the captureStep function to include screenshot capture
+async function captureStep() {
+    // Capture screenshot using html2canvas
+    const canvas = await html2canvas(document.getElementById('tacticBoard'));
+    const screenshot = canvas.toDataURL(); // Convert canvas to image URL
+
+    const stepData = {
+        id: steps.length + 1,
+        name: `Step ${steps.length + 1}`,
+        positions: {},
+        duration: 1,
+        screenshot: screenshot // Store the screenshot in the step data
+    };
+
+    elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const containerRect = document.getElementById('tacticBoard').getBoundingClientRect();
+        stepData.positions[element.id] = {
+            top: ((rect.top - containerRect.top) / containerRect.height * 100).toFixed(2),
+            left: ((rect.left - containerRect.left) / containerRect.width * 100).toFixed(2)
+        };
+    });
+
+    steps.push(stepData);
+    updateTimeline();
+}
+
+function updateTimeline() {
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '';
+
+    steps.forEach((step, index) => {
+        const stepBlock = document.createElement('div');
+        stepBlock.className = 'step-block';
+        
+        // Step text and controls
+        const stepContent = document.createElement('div');
+        stepContent.innerHTML = `
+            ${step.name}
+            <div class="step-controls">
+                <button onclick="editStep(${index})" style="font-size:12px">✏️</button>
+                <button onclick="deleteStep(${index})" style="font-size:12px">❌</button>
+            </div>
+        `;
+        
+        // Screenshot image
+        const screenshotImage = document.createElement('img');
+        screenshotImage.className = 'step-screenshot';
+        screenshotImage.src = step.screenshot;
+        screenshotImage.alt = `Step ${index + 1} Screenshot`;
+
+        // Append step content and screenshot to the step block
+        stepBlock.appendChild(stepContent);
+        stepBlock.appendChild(screenshotImage);
+
+        // Add click event to jump to the step
+        stepBlock.addEventListener('click', () => jumpToStep(index));
+
+        // Append the step block to the timeline
+        timeline.appendChild(stepBlock);
+    });
+}
+        // Initialize
+        updateTimeline();
+    </script>
+</body>
+</html>
