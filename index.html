@@ -85,12 +85,13 @@
         .tactic-board {
             position: relative;
             width: 90%;
-            max-width: 730px;
+            max-width: 700px;
             aspect-ratio: 4 / 3;
             background-color: #add8e6;
             border: 2px solid #000;
-            margin-bottom: 20px;
+            margin-top: 3%;
             cursor: crosshair;
+            
         }
 
         .line {
@@ -102,10 +103,12 @@
 
         .two-meter {
             top: 13%;
+            background-color: rgb(194, 37, 37);
         }
 
         .six-meter {
             top: 40%;
+            background-color: #1ccc45;
         }
 
         .goal {
@@ -131,11 +134,12 @@
             font-weight: bold;
             font-size: 20px;
             transition: all 0s none;
+           
         }
 
         .player {
             width: 5%;
-            height: 6%;
+            height: 8%;
             border: 2px solid #000;
         }
 
@@ -149,14 +153,14 @@
 
         .ball {
             width: 3%;
-            height: 3.5%;
+            height: 5%;
             background-color: #ff4500;
             border: 2px solid #000;
         }
 
         .goalie {
             width: 5%;
-            height: 6%;
+            height: 8%;
             background-color: #32cd32;
             border: 2px solid #000;
         }
@@ -236,6 +240,13 @@
             gap: 10px;
             margin: 10px 0;
         }
+        #topButtons{
+
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         .position-edit {
             display: flex;
@@ -247,6 +258,7 @@
             width: 70px;
             padding: 3px;
         }
+
         .step-previews {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -275,7 +287,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 80vw;
-            height: 80vh;
+            height: 10%;
             background: white;
             z-index: 1001;
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
@@ -295,34 +307,113 @@
             justify-content: flex-end;
             gap: 10px;
         }
+        .setting {
+            margin-bottom: 15px;
+        }
+
+        .setting label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .setting input[type="range"],
+        .setting input[type="color"] {
+            width: 100%;
+        }
+
+        .setting button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        #settingsTab {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            display: none;
+            width: 250px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
     </style>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
+    <div class="topButton">
+    <button id="settingsButton">Settings</button>
+    <button id="sixOnSixButton">6-on-6</button>
+    <button id="sixOnFiveButton">6-on-5</button>
+    
+    <div id="settingsTab">
+        <div class="setting">
+            <label for="colorPicker">Line Color</label>
+            <input type="color" id="colorPicker" value="#000000">
+        </div>
+        <div class="setting">
+            <label for="lineThickness">Line Thickness</label>
+            <input type="range" id="lineThickness" min="1" max="10" value="2">
+        </div>
+        <div class="setting">
+            <label for="drawingMode">Drawing Mode</label>
+            <select id="drawingMode">
+                <option value="freehand">Freehand</option>
+                <option value="straight">Straight Line</option>
+            </select>
+        </div>
+        <button id="closeSettings">Close Settings</button>
+    </div>
+</div>
     <div class="tactic-board" id="tacticBoard">
+        <canvas id="drawingCanvas"></canvas>
         <div class="line two-meter"></div>
         <div class="line six-meter"></div>
+        
         <div class="goal"></div>
         
         <!-- Team 1 Players -->
-        <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;">1</div>
-        <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;">2</div>
-        <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;">3</div>
-        <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;">4</div>
-        <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;">5</div>
-        <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;">6</div>
+        <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%" data-start-left2="15.49%" data-start-top="13%" data-start-left="12%">1</div>
+        <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%" data-start-left2="38.14%" data-start-top="35%" data-start-left="25%">2</div>
+        <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
+        data-start-left2="57.62%" data-start-top="45%" data-start-left="50%">3</div>
+        <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
+        data-start-left2="37%" data-start-top="35%" data-start-left="75%">4</div>
+        <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
+        data-start-left2="58%" data-start-top="13%" data-start-left="88%">5</div>
+        <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
+        data-start-left2="79.06%" data-start-top="20%" data-start-left="50%">6</div>
         
         <!-- Team 2 Players -->
-        <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;">1</div>
-        <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;">2</div>
-        <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;">3</div>
-        <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;">4</div>
-        <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;">5</div>
-        <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;">6</div>
+        <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
+        data-start-left2="47.27%" data-start-top="13%" data-start-left="18%">1</div>
+        <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
+        data-start-left2="32.57%" data-start-top="32%" data-start-left="30%">2</div>
+        <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
+        data-start-left2="57.67%" data-start-top="32%" data-start-left="70%">3</div>
+        <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;"  data-start-top2="11.77%"
+        data-start-left2="63.61%" data-start-top="38%" data-start-left="50%">4</div>
+        <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
+        data-start-left2="47.27%" data-start-top="13%" data-start-left="82%">5</div>
+        <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
+        data-start-left2="37.62%" data-start-top="12%" data-start-left="50%">6</div>
         
         <!-- Ball and Goalie -->
-        <div id="ball" class="ball" style="top: 48%; left: 50%;"></div>
-        <div id="goalie" class="goalie" style="top: 0%; left: 50%;">G</div>
+        <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%"
+        data-start-left2="40%" data-start-top="50%" data-start-left="50%"></div>
+        <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%"
+        data-start-left2="50%" data-start-top="0%" data-start-left="50%">G</div>
     </div>
 
     <div class="controls">
@@ -355,6 +446,65 @@
         let isAnimating = false;
         let animationSpeed = 1;
         let editingStepIndex = -1;
+        let lines = [];
+        const tacticBoard = document.getElementById('tacticBoard');
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+/*
+        
+*/
+
+        const sixOnSixButton = document.getElementById('sixOnSixButton'); // Use the existing button
+
+// Modify the "6-on-6" button functionality
+sixOnSixButton.addEventListener('click', () => {
+    elements.forEach(element => {
+        // Restore the positions from the data attributes
+        const startTop = element.getAttribute('data-start-top');
+        const startLeft = element.getAttribute('data-start-left');
+
+        if (startTop && startLeft) {
+            element.style.top = startTop;
+            element.style.left = startLeft;
+        }
+
+        // Ensure all players (even the previously hidden ones) are visible
+        element.style.opacity = 1;
+    });
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    lines = [];
+});
+
+
+        const sixOnFiveButton = document.getElementById('sixOnFiveButton');
+        const team2Players = document.querySelectorAll('.player.team2');
+sixOnFiveButton.addEventListener('click', () => {
+    // Eject one player from team2 (example: first player of team2)
+    if (team2Players.length > 0) {
+        const firstPlayer = team2Players[0];
+        firstPlayer.style.opacity = 0; // Hide the player
+    }
+
+    // Restore the positions of all players (including team1 and team2)
+    elements.forEach(element => {
+        // Fetch the new starting positions from the data attributes for the '6-on-5' play
+        const startTop2 = element.getAttribute('data-start-top2');
+        const startLeft2 = element.getAttribute('data-start-left2');
+
+        if (startTop2 && startLeft2) {
+            // Set the positions based on the new data attributes
+            element.style.top = startTop2;
+            element.style.left = startLeft2;
+            element.style.display = ''; // Ensure element is visible if hidden
+        }
+    });
+
+    // Clear the canvas for new tactical drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    lines = []; // Reset the lines array
+});
 
         // Speed Control
         document.getElementById('animationSpeed').addEventListener('input', (e) => {
@@ -592,6 +742,174 @@ function updateTimeline() {
 }
         // Initialize
         updateTimeline();
+
+        const settingsButton = document.getElementById('settingsButton');
+        const settingsTab = document.getElementById('settingsTab');
+        const closeSettingsButton = document.getElementById('closeSettings');
+        const colorPicker = document.getElementById('colorPicker');
+        const lineThicknessSlider = document.getElementById('lineThickness');
+        const drawingModeSelector = document.getElementById('drawingMode');
+        
+
+        let drawingMode = 'freehand';
+        let lineColor = '#000000';
+        let lineThickness = 2;
+        let isDrawing = false;
+        let lastX = null;
+        let lastY = null;
+        
+
+        settingsButton.addEventListener('click', () => {
+            settingsTab.style.display = 'block';
+        });
+
+        closeSettingsButton.addEventListener('click', () => {
+            settingsTab.style.display = 'none';
+        });
+
+        colorPicker.addEventListener('input', (event) => {
+            lineColor = event.target.value;
+        });
+
+        lineThicknessSlider.addEventListener('input', (event) => {
+            lineThickness = event.target.value;
+        });
+
+        drawingModeSelector.addEventListener('change', (event) => {
+            drawingMode = event.target.value;
+        });
+
+        // Mouse drawing functionality
+        tacticBoard.addEventListener('mousedown', (event) => {
+            if (event.target.classList.contains('player') || event.target.classList.contains('ball') || event.target.classList.contains('goalie')) {
+                return;
+            }
+            isDrawing = true;
+            [lastX, lastY] = [event.offsetX, event.offsetY];
+        });
+
+        tacticBoard.addEventListener('mousemove', (event) => {
+            if (!isDrawing) return;
+
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = lineThickness;
+            ctx.lineCap = 'round';
+
+            if (drawingMode === 'freehand') {
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(event.offsetX, event.offsetY);
+                ctx.stroke();
+                [lastX, lastY] = [event.offsetX, event.offsetY];
+            } else if (drawingMode === 'straight') {
+                redrawLines();
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(event.offsetX, event.offsetY);
+                ctx.stroke();
+            }
+        });
+
+        tacticBoard.addEventListener('mouseup', (event) => {
+            if (!isDrawing) return;
+            isDrawing = false;
+            if (drawingMode === 'straight') {
+                lines.push({
+                    startX: lastX,
+                    startY: lastY,
+                    endX: event.offsetX,
+                    endY: event.offsetY,
+                    color: lineColor,
+                    thickness: lineThickness
+                });
+                redrawLines();
+            }
+        });
+
+        tacticBoard.addEventListener('mouseleave', () => {
+            isDrawing = false;
+        });
+
+        // Touch drawing functionality
+        tacticBoard.addEventListener('touchstart', (event) => {
+            if (event.target.classList.contains('player') || event.target.classList.contains('ball') || event.target.classList.contains('goalie')) {
+                return;
+            }
+            isDrawing = true;
+            const touch = event.touches[0];
+            [lastX, lastY] = [touch.clientX - tacticBoard.offsetLeft, touch.clientY - tacticBoard.offsetTop];
+            event.preventDefault();  // Prevent default behavior like scrolling
+        });
+
+        tacticBoard.addEventListener('touchmove', (event) => {
+            if (!isDrawing) return;
+
+            const touch = event.touches[0];
+            const offsetX = touch.clientX - tacticBoard.offsetLeft;
+            const offsetY = touch.clientY - tacticBoard.offsetTop;
+
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = lineThickness;
+            ctx.lineCap = 'round';
+
+            if (drawingMode === 'freehand') {
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(offsetX, offsetY);
+                ctx.stroke();
+                [lastX, lastY] = [offsetX, offsetY];
+            } else if (drawingMode === 'straight') {
+                redrawLines();
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(offsetX, offsetY);
+                ctx.stroke();
+            }
+
+            event.preventDefault();  // Prevent default behavior like scrolling
+        });
+
+        tacticBoard.addEventListener('touchend', (event) => {
+            if (!isDrawing) return;
+            isDrawing = false;
+            if (drawingMode === 'straight') {
+                lines.push({
+                    startX: lastX,
+                    startY: lastY,
+                    endX: event.changedTouches[0].clientX - tacticBoard.offsetLeft,
+                    endY: event.changedTouches[0].clientY - tacticBoard.offsetTop,
+                    color: lineColor,
+                    thickness: lineThickness
+                });
+                redrawLines();
+            }
+        });
+
+        tacticBoard.addEventListener('touchcancel', () => {
+            isDrawing = false;
+        });
+
+        // Function to redraw previously drawn lines
+        function redrawLines() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines.forEach(line => {
+                ctx.strokeStyle = line.color;
+                ctx.lineWidth = line.thickness;
+                ctx.beginPath();
+                ctx.moveTo(line.startX, line.startY);
+                ctx.lineTo(line.endX, line.endY);
+                ctx.stroke();
+            });
+        }
+
+        function resizeCanvas() {
+            canvas.width = tacticBoard.clientWidth;
+            canvas.height = tacticBoard.clientHeight;
+            redrawLines();
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
     </script>
 </body>
 </html>
