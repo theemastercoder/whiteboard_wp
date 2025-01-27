@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,97 +9,316 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
             background-color: #f0f8ff;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
-        .step-block {
-    position: relative;
-    min-width: 150px; /* Wider for better spacing */
-    padding: 1px; /* More padding for better spacing */
-    background: #ffffff; /* White background for contrast */
-    border: 1px solid #ddd; /* Subtle border */
-    border-radius: 10px; /* Rounded corners */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; /* Space between elements */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Smooth hover effect */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-}
-
-.step-block:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
-}
-
-.step-block .step-name {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333; /* Darker text for better readability */
-}
-
-.step-controls {
-    position: absolute;
-    top: 5px; /* Adjusted position */
-    right: 5px; /* Adjusted position */
-    display: flex;
-    gap: 5px; /* Space between buttons */
-}
-
-.step-controls button {
-    background: #ffffff; /* White background for buttons */
-    border: 1px solid #ddd; /* Subtle border */
-    border-radius: 50%; /* Circular buttons */
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.step-controls button:hover {
-    background: #f0f0f0; /* Light gray on hover */
-    border-color: #ccc; /* Darker border on hover */
-}
-
-.step-screenshot {
-    width: 100%;
-    max-width: 150px;
-    border: 1px solid #ddd; /* Subtle border */
-    border-radius: 8px; /* Rounded corners */
-    margin-top: 10px; /* Space between text and screenshot */
-    transition: all 0.3s ease; /* Smooth hover effect */
-}
-
-.step-screenshot:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-}
 
         .tactic-board {
-            position: relative;
-            width: 90%;
-            max-width: 700px;
-            aspect-ratio: 4 / 3;
-            background-color: #add8e6;
-            border: 2px solid #000;
-            margin-top: 3%;
-            cursor: crosshair;
-            
+    width: 100%;
+    max-width: 800px;
+    min-width: unset; /* Remove fixed min-width */
+    height: 56.25vw; /* 16:9 aspect ratio */
+    max-height: 460px;
+    background-color: #add8e6;
+    position: relative;
+    border: 2px solid #000;
+    cursor: crosshair;
+}
+
+@media (orientation: portrait) {
+    .tactic-board {
+        height: 60vw;
+        max-height: 70vh;
+    }
+    
+    .controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (orientation: landscape) {
+    .tactic-board {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    overflow-x: auto;
+}
+   
+    
+   
+    
+    .controls button {
+        flex: 1 1 auto;
+        min-width: 120px;
+        padding: 12px 8px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .speed-control {
+        flex-wrap: nowrap;
+        padding: 5px 10px;
+    }
+
+    #topButtons {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .timeline {
+        margin-top: 0;
+    }
+    
+    .player, .goalie {
+        min-width: 24px;
+        min-height: 24px;
+    }
+    
+    button {
+        padding: 12px 24px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Add this at the end of your existing CSS */
+@media only screen and (max-width: 428px) { /* Targets iPhone 14 Pro Max and smaller */
+    .main-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .controls {
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .controls::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome/Safari */
+    }
+    
+    .controls button {
+        flex: 0 0 auto;
+        min-width: 120px;
+        padding: 12px 10px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    
+    .speed-control {
+        flex: 0 0 140px;
+        padding: 5px 10px;
+    }
+    
+    #topButtons {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        gap: 8px;
+    }
+    
+    /* Ensure timeline stays below */
+    .lower-section {
+        order: 3;
+        width: 100%;
+    }
+}
+
+/* For smaller iPhones (e.g., iPhone SE) */
+@media only screen and (max-width: 350px) {
+    .controls button {
+        min-width: 110px;
+        padding: 10px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .speed-control {
+        flex: 0 0 120px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .tactic-board {
+        height: 70vh;
+        max-height: 400px;
+    }
+    
+    .step-block {
+        min-width: 120px;
+    }
+    .controls {
+    touch-action: manipulation; /* Improve button responsiveness */
+}
+
+/* Prevent text selection during interactions */
+.player, .ball, .goalie {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Larger touch targets */
+button {
+    min-width: 48px;
+    min-height: 48px;
+}
+
+/* Mobile menu adjustments */
+#settingsTab {
+    width: 90vw;
+    max-width: 300px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Timeline scrolling improvements */
+.timeline {
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 15px;
+}
+}
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 20px 0;
         }
+
+        .step-block {
+            position: relative;
+            min-width: 150px;
+            /* Wider for better spacing */
+            padding: 1px;
+            /* More padding for better spacing */
+            background: #ffffff;
+            /* White background for contrast */
+            border: 1px solid #ddd;
+            /* Subtle border */
+            border-radius: 10px;
+            /* Rounded corners */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            /* Space between elements */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* Smooth hover effect */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Soft shadow for depth */
+        }
+
+        .step-block:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Enhanced shadow on hover */
+            transform: translateY(-2px);
+            /* Slight lift on hover */
+        }
+
+        .step-block .step-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            /* Darker text for better readability */
+        }
+
+        .step-controls {
+            position: absolute;
+            top: 5px;
+            /* Adjusted position */
+            right: 5px;
+            /* Adjusted position */
+            display: flex;
+            gap: 5px;
+            /* Space between buttons */
+        }
+
+        .step-controls button {
+            background: #ffffff;
+            /* White background for buttons */
+            border: 1px solid #ddd;
+            /* Subtle border */
+            border-radius: 50%;
+            /* Circular buttons */
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .step-controls button:hover {
+            background: #f0f0f0;
+            /* Light gray on hover */
+            border-color: #ccc;
+            /* Darker border on hover */
+        }
+
+        .step-screenshot {
+            width: 100%;
+            max-width: 150px;
+            border: 1px solid #ddd;
+            /* Subtle border */
+            border-radius: 8px;
+            /* Rounded corners */
+            margin-top: 10px;
+            /* Space between text and screenshot */
+            transition: all 0.3s ease;
+            /* Smooth hover effect */
+        }
+
+        .step-screenshot:hover {
+            transform: scale(1.05);
+            /* Slight zoom on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Enhanced shadow on hover */
+        }
+
+      
 
         .line {
             position: absolute;
             width: 100%;
             height: 0.5%;
-            background-color: #000;
+
         }
 
         .two-meter {
@@ -116,7 +336,7 @@
             width: 20%;
             height: 7%;
             background-color: #ff4500;
-            top: -6%;
+            top: -5.5%;
             left: 40%;
         }
 
@@ -126,7 +346,7 @@
             position: absolute;
             cursor: pointer;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(0, 0);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -134,12 +354,12 @@
             font-weight: bold;
             font-size: 20px;
             transition: all 0s none;
-           
+font-family: Arial, Helvetica, sans-serif;
         }
 
         .player {
             width: 5%;
-            height: 8%;
+            height: 6.5%;
             border: 2px solid #000;
         }
 
@@ -182,15 +402,27 @@
 
         .controls {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+
+        /* Timeline and Previews Container */
+        .lower-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .timeline {
-            width: 90%;
+            width: 100%;
             max-width: 730px;
-            height: 100px;
+            height: 120px;
             overflow-x: auto;
             display: flex;
             gap: 5px;
@@ -198,9 +430,10 @@
             background: #fff;
             border-radius: 5px;
             margin: 10px 0;
+
         }
 
-  
+
         .step-controls {
             position: absolute;
             top: -15px;
@@ -221,7 +454,7 @@
             background: white;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
         }
 
@@ -240,7 +473,8 @@
             gap: 10px;
             margin: 10px 0;
         }
-        #topButtons{
+
+        #topButtons {
 
             display: flex;
             gap: 10px;
@@ -266,6 +500,7 @@
             padding: 10px;
             width: 90%;
             max-width: 730px;
+            margin-top: 20px;
         }
 
         .step-preview {
@@ -290,7 +525,7 @@
             height: 10%;
             background: white;
             z-index: 1001;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             display: none;
         }
 
@@ -307,6 +542,7 @@
             justify-content: flex-end;
             gap: 10px;
         }
+
         .setting {
             margin-bottom: 15px;
         }
@@ -325,6 +561,7 @@
             width: 100%;
             margin-top: 10px;
         }
+
         #settingsTab {
             position: fixed;
             top: 30%;
@@ -347,101 +584,312 @@
             height: 100%;
             pointer-events: none;
         }
-        
+
+
+        #customizeTab{
+
+position: fixed;
+            top: 20%;
+            left: 60%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            display: none;
+            width: 250px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+
+
+
+
+
+        }
     </style>
+    <!-- Include the library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
+
 <body>
     <div class="topButton">
-    <button id="settingsButton">Settings</button>
-    <button id="sixOnSixButton">6-on-6</button>
-    <button id="sixOnFiveButton">6-on-5</button>
-    
-    <div id="settingsTab">
-        <div class="setting">
-            <label for="colorPicker">Line Color</label>
-            <input type="color" id="colorPicker" value="#000000">
-        </div>
-        <div class="setting">
-            <label for="lineThickness">Line Thickness</label>
-            <input type="range" id="lineThickness" min="1" max="10" value="2">
-        </div>
-        <div class="setting">
-            <label for="drawingMode">Drawing Mode</label>
-            <select id="drawingMode">
-                <option value="freehand">Freehand</option>
-                <option value="straight">Straight Line</option>
-            </select>
-        </div>
-        <button id="closeSettings">Close Settings</button>
-    </div>
-</div>
-    <div class="tactic-board" id="tacticBoard">
-        <canvas id="drawingCanvas"></canvas>
-        <div class="line two-meter"></div>
-        <div class="line six-meter"></div>
+        <button id="settingsButton">Settings</button>
+        <button id="sixOnSixButton">6-on-6</button>
+        <button id="sixOnFiveButton">6-on-5</button>
+        <button id="sidelines">sidelines</button>
+        <button id="counter">Counter</button>
+        <button id="customize">Customize</button>
         
-        <div class="goal"></div>
-        
-        <!-- Team 1 Players -->
-        <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%" data-start-left2="15.49%" data-start-top="13%" data-start-left="12%">1</div>
-        <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%" data-start-left2="38.14%" data-start-top="35%" data-start-left="25%">2</div>
-        <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
-        data-start-left2="57.62%" data-start-top="45%" data-start-left="50%">3</div>
-        <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
-        data-start-left2="37%" data-start-top="35%" data-start-left="75%">4</div>
-        <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
-        data-start-left2="58%" data-start-top="13%" data-start-left="88%">5</div>
-        <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
-        data-start-left2="79.06%" data-start-top="20%" data-start-left="50%">6</div>
-        
-        <!-- Team 2 Players -->
-        <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
-        data-start-left2="47.27%" data-start-top="13%" data-start-left="18%">1</div>
-        <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
-        data-start-left2="32.57%" data-start-top="32%" data-start-left="30%">2</div>
-        <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
-        data-start-left2="57.67%" data-start-top="32%" data-start-left="70%">3</div>
-        <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;"  data-start-top2="11.77%"
-        data-start-left2="63.61%" data-start-top="38%" data-start-left="50%">4</div>
-        <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
-        data-start-left2="47.27%" data-start-top="13%" data-start-left="82%">5</div>
-        <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
-        data-start-left2="37.62%" data-start-top="12%" data-start-left="50%">6</div>
-        
-        <!-- Ball and Goalie -->
-        <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%"
-        data-start-left2="40%" data-start-top="50%" data-start-left="50%"></div>
-        <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%"
-        data-start-left2="50%" data-start-top="0%" data-start-left="50%">G</div>
-    </div>
+        <div id ="customizeTab">
+            
+            <label for="team1Color">Team 1 color</label>
+            <input type="color" id="team1Color" value="#ffcc00">
+            <br>
+            <label for="team2Color">Team 2 color</label>
+            <input type="color" id="team2Color" value="#00bfff">
+            <br>
+            <h5>Team 1 names</h3>
+            
+            <label for="player1T1">Player 1</label>
+            <input type="text" id="player1T1" value="1">
+            <br>
+            
+            <label for="player2T1">Player 2</label>
+            <input type="text" id="player2T1" value="2">
+            <label for="player3T1">Player 3</label>
+            <input type="text" id="player3T1" value="3">
+            <label for="player4T1">Player 4</label>
+            <input type="text" id="player4T1" value="4">
+            <label for="player5T1">Player 5</label>
+            <input type="text" id="player5T1" value="5">
+            <label for="G1">Goalie  </label>
+            <input type="text" id="G1" value="G">
+            <h5>Team 2 names</h3>
+                <br>
+            <label for="player1T2">Player 1</label>
+            <input type="text" id="player1T1" value="1">
+            <label for="player2T2">Player 2</label>
+            <input type="text" id="player2T2" value="2">
+            <label for="player3T2">Player 3</label>
+            <input type="text" id="player3T2" value="3">
+            <label for="player4T2">Player 4</label>
+            <input type="text" id="player4T2" value="4">
+            <label for="player5T2">Player 5</label>
+            <input type="text" id="player5T2" value="5">
+            <label for="G2">Goalie  </label>
+            <input type="text" id="G2" value="G">
+            <button id="customizeExit">Exit</button>
 
-    <div class="controls">
-        <button id="addstep">➕ Add Step</button>
-        <button id="playAnimationButton">▶️ Play</button>
-        <button id="savePlay">💾 Save</button>
-        <button id="loadPlay">📂 Load</button>
-        <div class="speed-control">
-            <label>Speed:</label>
-            <input type="range" id="animationSpeed" min="0.5" max="3" step="0.5" value="1">
-            <span id="speedValue">1x</span>
+
+        </div>
+        <div id="settingsTab">
+            <div class="setting">
+                <label for="colorPicker">Line Color</label>
+                <input type="color" id="colorPicker" value="#000000">
+            </div>
+            <div class="setting">
+                <label for="lineThickness">Line Thickness</label>
+                <input type="range" id="lineThickness" min="1" max="10" value="2">
+            </div>
+            <div class="setting">
+                <label for="drawingMode">Drawing Mode</label>
+                <select id="drawingMode">
+                    <option value="freehand">Freehand</option>
+                    <option value="straight">Straight Line</option>
+                </select>
+            </div>
+            <button id="closeSettings">Close Settings</button>
+            
         </div>
     </div>
+    <div class="main-content">
+        <div class="tactic-board" id="tacticBoard">
+            <canvas id="drawingCanvas"></canvas>
+            <div class="line two-meter"></div>
+            <div class="line six-meter"></div>
 
-    <div class="timeline" id="timeline"></div>
+            <div class="goal"></div>
 
-     <div class="step-previews" id="stepPreviews"></div>
-    
-    <div class="edit-frame" id="editFrame">
-        <div class="edit-frame-content" id="editFrameContent"></div>
-        <div class="edit-controls">
-            <button onclick="saveStepEdit()">✅ Done</button>
-            <button onclick="cancelStepEdit()">❌ Cancel</button>
+            <!-- Team 1 Players -->
+            <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%"
+                data-start-left2="15.49%" data-start-top="13%" data-start-left="12%" data-start-left3="0.5%" data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="76%">1</div>
+            <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%"
+                data-start-left2="38.14%" data-start-top="35%" data-start-left="25%" data-start-left3="0.5%" data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="76%" >2</div>
+            <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
+                data-start-left2="57.62%" data-start-top="45%" data-start-left="50%" data-start-left3="0.5%" data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="76%">3</div>
+            <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
+                data-start-left2="37%" data-start-top="35%" data-start-left="75%" data-start-left3="0.5%" data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="76%">4</div>
+            <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
+                data-start-left2="58%" data-start-top="13%" data-start-left="88%" data-start-left3="0.5%" data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="76%">5</div>
+            <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
+                data-start-left2="79.06%" data-start-top="20%" data-start-left="50%" data-start-left3="0.5%" data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="86%">6</div>
+
+            <!-- Team 2 Players -->
+            <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
+                data-start-left2="47.27%" data-start-top="13%" data-start-left="18%" data-start-left3="94%" data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="16%">1</div>
+            <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
+                data-start-left2="32.57%" data-start-top="32%" data-start-left="30%" data-start-left3="94%" data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="16%">2</div>
+            <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;" data-start-top2="11.77%"
+                data-start-left2="63.61%" data-start-top="38%" data-start-left="50%" data-start-left3="94%" data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="16%">3</div>
+            <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
+                data-start-left2="57.67%" data-start-top="32%" data-start-left="70%" data-start-left3="94%" data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="16%">4</div>
+            <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
+                data-start-left2="47.27%" data-start-top="13%" data-start-left="82%" data-start-left3="94%" data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="16%">5</div>
+            <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
+                data-start-left2="37.62%" data-start-top="12%" data-start-left="50%" data-start-left3="94%" data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="10%">6</div>
+
+            <!-- Ball and Goalie -->
+            <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%" data-start-left2="40%"
+                data-start-top="50%" data-start-left="50%"></div>
+            <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%" data-start-left2="50%"
+                data-start-top="0%" data-start-left="50%">G</div>
+        </div>
+
+        <div class="controls">
+            <button id="addstep">➕ Add Step</button>
+            <button id="playAnimationButton">▶️ Play</button>
+            <button id="savePlay">💾 Save</button>
+            <button id="loadPlay">📂 Load</button>
+            <div class="speed-control">
+                <label>Speed:</label>
+                <input type="range" id="animationSpeed" min="0.5" max="3" step="0.5" value="1">
+                <span id="speedValue">1x</span>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    </div>
+    <div class="lower-section">
+        <div class="timeline" id="timeline"></div>
+
+        <div class="step-previews" id="stepPreviews"></div>
+
+        <div class="edit-frame" id="editFrame">
+            <div class="edit-frame-content" id="editFrameContent"></div>
+            <div class="edit-controls">
+                <button onclick="saveStepEdit()">✅ Done</button>
+                <button onclick="cancelStepEdit()">❌ Cancel</button>
+            </div>
         </div>
     </div>
-
     <script>
+        // Modify the "6-on-6" button functionality
+        const sixOnSixButton = document.getElementById('sixOnSixButton'); // Use the existing button
+        sixOnSixButton.addEventListener('click', () => {
+            elements.forEach(element => {
+                // Restore the positions from the data attributes
+                const startTop = element.getAttribute('data-start-top');
+                const startLeft = element.getAttribute('data-start-left');
+
+                if (startTop && startLeft) {
+                    element.style.top = startTop;
+                    element.style.left = startLeft;
+                }
+
+                // Ensure all players (even the previously hidden ones) are visible
+                element.style.opacity = 1;
+            });
+
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines = [];
+        });
+
+        const sidelines = document.getElementById('sidelines'); // Use the existing button
+        sidelines.addEventListener('click', () => {
+            elements.forEach(element => {
+                // Restore the positions from the data attributes
+                const startTop = element.getAttribute('data-start-top3');
+                const startLeft = element.getAttribute('data-start-left3');
+
+                if (startTop && startLeft) {
+                    element.style.top = startTop;
+                    element.style.left = startLeft;
+                }
+
+                // Ensure all players (even the previously hidden ones) are visible
+                element.style.opacity = 1;
+            });
+
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines = [];
+        });
+
+        const counter = document.getElementById('counter'); // Use the existing button
+        counter.addEventListener('click', () => {
+            elements.forEach(element => {
+                // Restore the positions from the data attributes
+                const startTop = element.getAttribute('data-start-top4');
+                const startLeft = element.getAttribute('data-start-left4');
+
+                if (startTop && startLeft) {
+                    element.style.top = startTop;
+                    element.style.left = startLeft;
+                }
+
+                // Ensure all players (even the previously hidden ones) are visible
+                element.style.opacity = 1;
+            });
+
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines = [];
+        });
+        
+        function dragStartTouch(e) {
+    e.preventDefault();
+    const target = e.target;
+    const tacticBoard = target.parentElement;
+    const boardRect = tacticBoard.getBoundingClientRect();
+    const touch = e.touches[0];
+    
+    // Get initial element position in viewport coordinates
+    const elementRect = target.getBoundingClientRect();
+    const startX = touch.clientX - elementRect.left;
+    const startY = touch.clientY - elementRect.top;
+
+    function dragMoveTouch(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const boardWidth = boardRect.width;
+        const boardHeight = boardRect.height;
+        
+        // Calculate new position relative to board
+        let newX = touch.clientX - startX - boardRect.left;
+        let newY = touch.clientY - startY - boardRect.top;
+        
+        // Convert to percentages
+        newX = Math.max(0, Math.min(newX, boardWidth)) / boardWidth * 100;
+        newY = Math.max(0, Math.min(newY, boardHeight)) / boardHeight * 100;
+        
+        target.style.left = `${newX}%`;
+        target.style.top = `${newY}%`;
+    }
+
+    function dragEndTouch() {
+        document.removeEventListener('touchmove', dragMoveTouch, { passive: false });
+        document.removeEventListener('touchend', dragEndTouch);
+    }
+
+    document.addEventListener('touchmove', dragMoveTouch, { passive: false });
+    document.addEventListener('touchend', dragEndTouch);
+}        
+
+
         const elements = document.querySelectorAll('.player, .ball, .goalie');
+
+        const sixOnFiveButton = document.getElementById('sixOnFiveButton');
+        const team2Players = document.querySelectorAll('.player.team2');
+        sixOnFiveButton.addEventListener('click', () => {
+            // Eject one player from team2 (example: first player of team2)
+            if (team2Players.length > 0) {
+                const firstPlayer = team2Players[0];
+                firstPlayer.style.opacity = 0; // Hide the player
+            }
+
+            // Restore the positions of all players (including team1 and team2)
+            elements.forEach(element => {
+                // Fetch the new starting positions from the data attributes for the '6-on-5' play
+                const startTop2 = element.getAttribute('data-start-top2');
+                const startLeft2 = element.getAttribute('data-start-left2');
+
+                if (startTop2 && startLeft2) {
+                    // Set the positions based on the new data attributes
+                    element.style.top = startTop2;
+                    element.style.left = startLeft2;
+                    element.style.display = ''; // Ensure element is visible if hidden
+                }
+            });
+
+            // Clear the canvas for new tactical drawing
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines = []; // Reset the lines array
+        });
+
+
         let steps = [];
         let isAnimating = false;
         let animationSpeed = 1;
@@ -450,62 +898,9 @@
         const tacticBoard = document.getElementById('tacticBoard');
         const canvas = document.getElementById('drawingCanvas');
         const ctx = canvas.getContext('2d');
-/*
-        
-*/
-
-        const sixOnSixButton = document.getElementById('sixOnSixButton'); // Use the existing button
-
-// Modify the "6-on-6" button functionality
-sixOnSixButton.addEventListener('click', () => {
-    elements.forEach(element => {
-        // Restore the positions from the data attributes
-        const startTop = element.getAttribute('data-start-top');
-        const startLeft = element.getAttribute('data-start-left');
-
-        if (startTop && startLeft) {
-            element.style.top = startTop;
-            element.style.left = startLeft;
-        }
-
-        // Ensure all players (even the previously hidden ones) are visible
-        element.style.opacity = 1;
-    });
-
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    lines = [];
-});
-
-
-        const sixOnFiveButton = document.getElementById('sixOnFiveButton');
-        const team2Players = document.querySelectorAll('.player.team2');
-sixOnFiveButton.addEventListener('click', () => {
-    // Eject one player from team2 (example: first player of team2)
-    if (team2Players.length > 0) {
-        const firstPlayer = team2Players[0];
-        firstPlayer.style.opacity = 0; // Hide the player
-    }
-
-    // Restore the positions of all players (including team1 and team2)
-    elements.forEach(element => {
-        // Fetch the new starting positions from the data attributes for the '6-on-5' play
-        const startTop2 = element.getAttribute('data-start-top2');
-        const startLeft2 = element.getAttribute('data-start-left2');
-
-        if (startTop2 && startLeft2) {
-            // Set the positions based on the new data attributes
-            element.style.top = startTop2;
-            element.style.left = startLeft2;
-            element.style.display = ''; // Ensure element is visible if hidden
-        }
-    });
-
-    // Clear the canvas for new tactical drawing
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    lines = []; // Reset the lines array
-});
-
+        // Manual correction offsets
+        const POSITION_OFFSET_X = 0; // Adjust these values as needed
+        const POSITION_OFFSET_Y = 0; // Positive values shift right/down
         // Speed Control
         document.getElementById('animationSpeed').addEventListener('input', (e) => {
             animationSpeed = e.target.value;
@@ -514,8 +909,16 @@ sixOnFiveButton.addEventListener('click', () => {
 
         // Step Management
         document.getElementById('addstep').addEventListener('click', captureStep);
-        
+
         function captureStep() {
+            const container = document.getElementById('tacticBoard');
+            const containerRect = container.getBoundingClientRect();
+
+            // Get computed styles to account for borders
+            const computedStyle = window.getComputedStyle(container);
+            const borderLeft = parseFloat(computedStyle.borderLeftWidth) || 0;
+            const borderTop = parseFloat(computedStyle.borderTopWidth) || 0;
+
             const stepData = {
                 id: steps.length + 1,
                 name: `Step ${steps.length + 1}`,
@@ -525,10 +928,15 @@ sixOnFiveButton.addEventListener('click', () => {
 
             elements.forEach(element => {
                 const rect = element.getBoundingClientRect();
-                const containerRect = document.getElementById('tacticBoard').getBoundingClientRect();
+
+                // Calculate positions accounting for container borders
+                const absoluteLeft = rect.left - containerRect.left - borderLeft;
+                const absoluteTop = rect.top - containerRect.top - borderTop;
+
+                // Convert to percentages of container's content area
                 stepData.positions[element.id] = {
-                    top: ((rect.top - containerRect.top) / containerRect.height * 100).toFixed(2),
-                    left: ((rect.left - containerRect.left) / containerRect.width * 100).toFixed(2)
+                    left: ((absoluteLeft / (containerRect.width - borderLeft * 2)) * 100).toFixed(2),
+                    top: ((absoluteTop / (containerRect.height - borderTop * 2)) * 100).toFixed(2)
                 };
             });
 
@@ -544,7 +952,7 @@ sixOnFiveButton.addEventListener('click', () => {
             const step = steps[index];
             const modal = document.getElementById('editModal');
             document.getElementById('stepTitle').textContent = step.name;
-            
+
             const editor = document.getElementById('positionEditor');
             editor.innerHTML = '';
             Object.entries(step.positions).forEach(([id, pos]) => {
@@ -556,7 +964,7 @@ sixOnFiveButton.addEventListener('click', () => {
                     </div>
                 `;
             });
-            
+
             modal.style.display = 'block';
         }
 
@@ -586,7 +994,7 @@ sixOnFiveButton.addEventListener('click', () => {
 
         document.getElementById('loadPlay').addEventListener('click', () => {
             const data = localStorage.getItem('savedPlay');
-            if(data) {
+            if (data) {
                 steps = JSON.parse(data);
                 updateTimeline();
                 alert('Play loaded successfully!');
@@ -603,18 +1011,17 @@ sixOnFiveButton.addEventListener('click', () => {
                     for (let i = 0; i < steps.length - 1; i++) {
                         const currentStep = steps[i];
                         const nextStep = steps[i + 1];
-                        
+
                         // Jump to current step without animation
                         elements.forEach(element => {
                             const pos = currentStep.positions[element.id];
-                            element.style.transition = 'none';
-                            element.style.top = `${pos.top}%`;
-                            element.style.left = `${pos.left}%`;
+                            element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
+                            element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
                         });
-                        
+
                         // Wait for frame update
                         await new Promise(resolve => requestAnimationFrame(resolve));
-                        
+
                         // Animate to next step
                         elements.forEach(element => {
                             const targetPos = nextStep.positions[element.id];
@@ -623,7 +1030,7 @@ sixOnFiveButton.addEventListener('click', () => {
                             element.style.left = `${targetPos.left}%`;
                         });
 
-                        await new Promise(resolve => 
+                        await new Promise(resolve =>
                             setTimeout(resolve, currentStep.duration * 1000 / animationSpeed)
                         );
                     }
@@ -637,10 +1044,9 @@ sixOnFiveButton.addEventListener('click', () => {
         function jumpToStep(index) {
             const step = steps[index];
             elements.forEach(element => {
-                const pos = step.positions[element.id];
-                element.style.transition = 'none';
-                element.style.top = `${pos.top}%`;
-                element.style.left = `${pos.left}%`;
+                const pos = currentStep.positions[element.id];
+                element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
+                element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
             });
         }
 
@@ -649,9 +1055,91 @@ sixOnFiveButton.addEventListener('click', () => {
             document.getElementById('editModal').style.display = 'none';
         }
 
+
+
+
+
+
+        // Modify the captureStep function to include screenshot capture
+        async function captureStep() {
+            // Capture screenshot using html2canvas
+            const canvas = await html2canvas(document.getElementById('tacticBoard'));
+            const screenshot = canvas.toDataURL(); // Convert canvas to image URL
+
+            const stepData = {
+                id: steps.length + 1,
+                name: `Step ${steps.length + 1}`,
+                positions: {},
+                duration: 1,
+                screenshot: screenshot // Store the screenshot in the step data
+            };
+
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const containerRect = document.getElementById('tacticBoard').getBoundingClientRect();
+                stepData.positions[element.id] = {
+                    top: ((rect.top - containerRect.top) / containerRect.height * 100).toFixed(2),
+                    left: ((rect.left - containerRect.left) / containerRect.width * 100).toFixed(2)
+                };
+            });
+
+            steps.push(stepData);
+            updateTimeline();
+        }
+
+        function updateTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            steps.forEach((step, index) => {
+                const stepBlock = document.createElement('div');
+                stepBlock.className = 'step-block';
+
+                // Step text and controls
+                const stepContent = document.createElement('div');
+                stepContent.innerHTML = `
+            ${step.name}
+            <div class="step-controls">
+                <button onclick="editStep(${index})" style="font-size:12px">✏️</button>
+                <button onclick="deleteStep(${index})" style="font-size:12px">❌</button>
+            </div>
+        `;
+
+                // Screenshot image
+                const screenshotImage = document.createElement('img');
+                screenshotImage.className = 'step-screenshot';
+                screenshotImage.src = step.screenshot;
+                screenshotImage.alt = `Step ${index + 1} Screenshot`;
+
+                // Append step content and screenshot to the step block
+                stepBlock.appendChild(stepContent);
+                stepBlock.appendChild(screenshotImage);
+
+                // Add click event to jump to the step
+                stepBlock.addEventListener('click', () => jumpToStep(index));
+
+                // Append the step block to the timeline
+                timeline.appendChild(stepBlock);
+            });
+        }
+        // Initialize
+        updateTimeline();
+
+        const settingsButton = document.getElementById('settingsButton');
+        const settingsTab = document.getElementById('settingsTab');
+        const closeSettingsButton = document.getElementById('closeSettings');
+        const colorPicker = document.getElementById('colorPicker');
+        const lineThicknessSlider = document.getElementById('lineThickness');
+        const drawingModeSelector = document.getElementById('drawingMode');
+
         // Draggable Functionality
         elements.forEach(element => {
             element.addEventListener('mousedown', startDrag);
+   
+
+    // Touch event listeners
+    element.addEventListener('touchstart', dragStartTouch);
+
         });
 
         function startDrag(e) {
@@ -664,7 +1152,7 @@ sixOnFiveButton.addEventListener('click', () => {
                 const boardRect = document.getElementById('tacticBoard').getBoundingClientRect();
                 const newX = (e.clientX - startX) / boardRect.width * 100;
                 const newY = (e.clientY - startY) / boardRect.height * 100;
-                
+
                 element.style.left = `${Math.max(0, Math.min(100, newX))}%`;
                 element.style.top = `${Math.max(0, Math.min(100, newY))}%`;
             }
@@ -678,86 +1166,13 @@ sixOnFiveButton.addEventListener('click', () => {
             document.addEventListener('mouseup', stopDrag);
         }
 
-        // Modify the captureStep function to include screenshot capture
-async function captureStep() {
-    // Capture screenshot using html2canvas
-    const canvas = await html2canvas(document.getElementById('tacticBoard'));
-    const screenshot = canvas.toDataURL(); // Convert canvas to image URL
-
-    const stepData = {
-        id: steps.length + 1,
-        name: `Step ${steps.length + 1}`,
-        positions: {},
-        duration: 1,
-        screenshot: screenshot // Store the screenshot in the step data
-    };
-
-    elements.forEach(element => {
-        const rect = element.getBoundingClientRect();
-        const containerRect = document.getElementById('tacticBoard').getBoundingClientRect();
-        stepData.positions[element.id] = {
-            top: ((rect.top - containerRect.top) / containerRect.height * 100).toFixed(2),
-            left: ((rect.left - containerRect.left) / containerRect.width * 100).toFixed(2)
-        };
-    });
-
-    steps.push(stepData);
-    updateTimeline();
-}
-
-function updateTimeline() {
-    const timeline = document.getElementById('timeline');
-    timeline.innerHTML = '';
-
-    steps.forEach((step, index) => {
-        const stepBlock = document.createElement('div');
-        stepBlock.className = 'step-block';
-        
-        // Step text and controls
-        const stepContent = document.createElement('div');
-        stepContent.innerHTML = `
-            ${step.name}
-            <div class="step-controls">
-                <button onclick="editStep(${index})" style="font-size:12px">✏️</button>
-                <button onclick="deleteStep(${index})" style="font-size:12px">❌</button>
-            </div>
-        `;
-        
-        // Screenshot image
-        const screenshotImage = document.createElement('img');
-        screenshotImage.className = 'step-screenshot';
-        screenshotImage.src = step.screenshot;
-        screenshotImage.alt = `Step ${index + 1} Screenshot`;
-
-        // Append step content and screenshot to the step block
-        stepBlock.appendChild(stepContent);
-        stepBlock.appendChild(screenshotImage);
-
-        // Add click event to jump to the step
-        stepBlock.addEventListener('click', () => jumpToStep(index));
-
-        // Append the step block to the timeline
-        timeline.appendChild(stepBlock);
-    });
-}
-        // Initialize
-        updateTimeline();
-
-        const settingsButton = document.getElementById('settingsButton');
-        const settingsTab = document.getElementById('settingsTab');
-        const closeSettingsButton = document.getElementById('closeSettings');
-        const colorPicker = document.getElementById('colorPicker');
-        const lineThicknessSlider = document.getElementById('lineThickness');
-        const drawingModeSelector = document.getElementById('drawingMode');
-        
-
         let drawingMode = 'freehand';
         let lineColor = '#000000';
         let lineThickness = 2;
         let isDrawing = false;
         let lastX = null;
         let lastY = null;
-        
+
 
         settingsButton.addEventListener('click', () => {
             settingsTab.style.display = 'block';
@@ -910,6 +1325,69 @@ function updateTimeline() {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
+
+
+// Get elements
+const team1Color = document.getElementById('team1Color');
+const team2Color = document.getElementById('team2Color');
+const customizeExit = document.getElementById('customizeExit');
+const customizeTab = document.getElementById('customizeTab');
+const customize = document.getElementById('customize');
+
+// Fix 1: Use proper property names and assignment
+function updateTeamColors() {
+    // Team 1
+    document.querySelectorAll('.team1').forEach(element => {
+        element.style.backgroundColor = team1Color.value;
+    });
+    
+    // Team 2
+    document.querySelectorAll('.team2').forEach(element => {
+        element.style.backgroundColor = team2Color.value;
+    });
+}
+
+// Fix 2: Add event listeners for color changes
+team1Color.addEventListener('input', updateTeamColors);
+team2Color.addEventListener('input', updateTeamColors);
+
+// Fix 3: Text customization
+function updatePlayerNames() {
+    // Team 1
+    document.getElementById('player1-team1').textContent = document.getElementById('player1T1').value;
+    document.getElementById('player2-team1').textContent = document.getElementById('player2T1').value;
+    document.getElementById('player3-team1').textContent = document.getElementById('player3T1').value;
+    document.getElementById('player4-team1').textContent = document.getElementById('player4T1').value;
+    document.getElementById('player5-team1').textContent = document.getElementById('player5T1').value;
+    document.getElementById('goalie').textContent = document.getElementById('G1').value;
+
+    // Team 2
+    document.getElementById('player1-team2').textContent = document.getElementById('player1T2').value;
+    document.getElementById('player2-team2').textContent = document.getElementById('player2T2').value;
+    document.getElementById('player3-team2').textContent = document.getElementById('player3T2').value;
+    document.getElementById('player4-team2').textContent = document.getElementById('player4T2').value;
+    document.getElementById('player5-team2').textContent = document.getElementById('player5T2').value;
+    document.getElementById('goalie').textContent = document.getElementById('G2').value;
+}
+
+// Fix 4: Add input event listeners for all text fields
+document.querySelectorAll('#customizeTab input[type="text"]').forEach(input => {
+    input.addEventListener('input', updatePlayerNames);
+});
+
+// Modal handling
+customize.addEventListener('click', () => {
+    customizeTab.style.display = 'block';
+});
+
+customizeExit.addEventListener('click', () => {
+    customizeTab.style.display = 'none';
+});
+
+// Initial update
+updateTeamColors();
+updatePlayerNames();
     </script>
 </body>
+
 </html>
