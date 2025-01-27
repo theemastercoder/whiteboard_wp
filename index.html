@@ -734,6 +734,9 @@ position: fixed;
             <button id="playAnimationButton">▶️ Play</button>
             <button id="savePlay">💾 Save</button>
             <button id="loadPlay">📂 Load</button>
+            <button id="exportPlay">Export Play</button>
+<input type="file" id="importInput" accept=".tactic" style="display: none;" />
+<button id="importPlay" onclick="document.getElementById('importInput').click()">Import Play</button>
             <div class="speed-control">
                 <label>Speed:</label>
                 <input type="range" id="animationSpeed" min="0.5" max="3" step="0.5" value="1">
@@ -893,6 +896,73 @@ position: fixed;
             lines = []; // Reset the lines array
         });
 
+        document.getElementById('exportPlay').addEventListener('click', exportPlay);
+document.getElementById('importInput').addEventListener('change', (e) => {
+    if (e.target.files[0]) {
+        importPlay(e.target.files[0]);
+    }
+});
+
+        // Export Function
+function exportPlay() {
+    const data = JSON.stringify({
+        version: "1.0",
+        steps: steps,
+        offsets: { x: POSITION_OFFSET_X, y: POSITION_OFFSET_Y }
+    }, null, 2);
+
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `play_${new Date().toISOString().slice(0,10)}.tactic`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function importPlay(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            // Validate file structure
+            if (!data.steps || !Array.isArray(data.steps)) {
+                throw new Error('Invalid file format');
+            }
+
+            // Clear current steps
+            steps = [];
+
+            // Load steps with image reviver
+            data.steps.forEach(step => {
+                // Create new step object
+                const newStep = {
+                    ...step,
+                    // Convert screenshot data to blob if needed
+                    screenshot: step.screenshot.startsWith('blob:') ? 
+                        step.screenshot : 
+                        `data:image/png;base64,${step.screenshot}`
+                };
+                
+                steps.push(newStep);
+            });
+
+            if (data.offsets) {
+                POSITION_OFFSET_X = data.offsets.x;
+                POSITION_OFFSET_Y = data.offsets.y;
+            }
+
+            updateTimeline();
+            alert('Play imported successfully!');
+        } catch (error) {
+            alert('Error importing play: ' + error.message);
+        }
+    };
+    reader.readAsText(file);
+}
 
         let steps = [];
         let isAnimating = false;
@@ -1009,50 +1079,61 @@ position: fixed;
 
         // Animation System
         document.getElementById('playAnimationButton').addEventListener('click', async () => {
-            if (!isAnimating && steps.length > 1) {
-                isAnimating = true;
-                try {
-                    for (let i = 0; i < steps.length - 1; i++) {
-                        const currentStep = steps[i];
-                        const nextStep = steps[i + 1];
-
-                        // Jump to current step without animation
-                        elements.forEach(element => {
-                            const pos = currentStep.positions[element.id];
-                            element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
-                            element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
-                        });
-
-                        // Wait for frame update
-                        await new Promise(resolve => requestAnimationFrame(resolve));
-
-                        // Animate to next step
-                        elements.forEach(element => {
-                            const targetPos = nextStep.positions[element.id];
-                            element.style.transition = `all ${currentStep.duration / animationSpeed}s ease-in-out`;
-                            element.style.top = `${targetPos.top}%`;
-                            element.style.left = `${targetPos.left}%`;
-                        });
-
-                        await new Promise(resolve =>
-                            setTimeout(resolve, currentStep.duration * 1000 / animationSpeed)
-                        );
-                    }
-                } finally {
-                    isAnimating = false;
-                }
-            }
-        });
-
-        // Jump to Step
-        function jumpToStep(index) {
-            const step = steps[index];
+    if (!isAnimating && steps.length > 0) { // Changed to check for any steps
+        isAnimating = true;
+        try {
+            // Start by showing the first step immediately
+            const firstStep = steps[0];
             elements.forEach(element => {
-                const pos = currentStep.positions[element.id];
+                const pos = firstStep.positions[element.id];
+                element.style.transition = 'none';
                 element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
                 element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
             });
+
+            // Force synchronous layout update
+            await new Promise(resolve => requestAnimationFrame(resolve));
+
+            // Animate through all steps sequentially
+            for (let i = 0; i < steps.length; i++) {
+                const currentStep = steps[i];
+                
+                // If there's a next step, animate to it
+                if (i < steps.length - 1) {
+                    const nextStep = steps[i + 1];
+                    
+                    // Set up transition for animation
+                    elements.forEach(element => {
+                        const targetPos = nextStep.positions[element.id];
+                        element.style.transition = `all ${currentStep.duration / animationSpeed}s ease-in-out`;
+                        element.style.top = `${targetPos.top}%`;
+                        element.style.left = `${targetPos.left}%`;
+                    });
+
+                    // Wait for animation duration
+                    await new Promise(resolve => 
+                        setTimeout(resolve, currentStep.duration * 1000 / animationSpeed)
+                    );
+                }
+            }
+        } finally {
+            isAnimating = false;
         }
+    }
+});
+
+        // Jump to Step
+        function jumpToStep(index) {
+    const step = steps[index];
+    elements.forEach(element => {
+        const pos = step.positions[element.id];
+        element.style.transition = 'none';
+        element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
+        element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
+    });
+    // Force layout update
+    void element.offsetHeight; // This triggers a reflow
+}
 
         // Modal Handling
         function closeModal() {
