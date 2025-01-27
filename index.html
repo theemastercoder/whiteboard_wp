@@ -12,205 +12,218 @@
             align-items: center;
             padding: 20px;
             min-height: 100vh;
-            background-color: #f0f8ff;
+            background-color: #2D2D2D;
             box-sizing: border-box;
         }
 
         .tactic-board {
-    width: 100%;
-    max-width: 800px;
-    min-width: unset; /* Remove fixed min-width */
-    height: 56.25vw; /* 16:9 aspect ratio */
-    max-height: 460px;
-    background-color: #add8e6;
-    position: relative;
-    border: 2px solid #000;
-    cursor: crosshair;
-}
-
-@media (orientation: portrait) {
-    .tactic-board {
-        height: 60vw;
-        max-height: 70vh;
-    }
-    
-    .controls {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-@media (orientation: landscape) {
-    .tactic-board {
-        height: 70vh;
-    }
-}
-
-@media (max-width: 768px) {
-
-    .main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-}
-
-.controls {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    overflow-x: auto;
-}
-   
-    
-   
-    
-    .controls button {
-        flex: 1 1 auto;
-        min-width: 120px;
-        padding: 12px 8px;
-        font-size: 0.9rem;
-        white-space: nowrap;
-    }
-
-    .speed-control {
-        flex-wrap: nowrap;
-        padding: 5px 10px;
-    }
-
-    #topButtons {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 5px;
-    }
-
-    .timeline {
-        margin-top: 0;
-    }
-    
-    .player, .goalie {
-        min-width: 24px;
-        min-height: 24px;
-    }
-    
-    button {
-        padding: 12px 24px;
-        font-size: 1.1rem;
-    }
-}
-
-/* Add this at the end of your existing CSS */
-@media only screen and (max-width: 428px) { /* Targets iPhone 14 Pro Max and smaller */
-    .main-content {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .controls {
-        flex-direction: row !important;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
-        padding: 10px;
-        gap: 8px;
-    }
-    
-    .controls::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for Chrome/Safari */
-    }
-    
-    .controls button {
-        flex: 0 0 auto;
-        min-width: 120px;
-        padding: 12px 10px;
-        font-size: 0.85rem;
-        white-space: nowrap;
-    }
-    
-    .speed-control {
-        flex: 0 0 140px;
-        padding: 5px 10px;
-    }
-    
-    #topButtons {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 5px;
-        gap: 8px;
-    }
-    
-    /* Ensure timeline stays below */
-    .lower-section {
-        order: 3;
-        width: 100%;
-    }
-}
-
-/* For smaller iPhones (e.g., iPhone SE) */
-@media only screen and (max-width: 350px) {
-    .controls button {
-        min-width: 110px;
-        padding: 10px 8px;
-        font-size: 0.8rem;
-    }
-    
-    .speed-control {
-        flex: 0 0 120px;
-    }
-}
+            width: 100%;
+            max-width: 800px;
+            min-width: unset;
+            /* Remove fixed min-width */
+            height: 56.25vw;
+            /* 16:9 aspect ratio */
+            max-height: 460px;
+            background-color: #add8e6;
+            position: relative;
+            border: 2px solid #000;
+            cursor: crosshair;
+            
+        }
 
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-    
-    .tactic-board {
-        height: 70vh;
-        max-height: 400px;
-    }
-    
-    .step-block {
-        min-width: 120px;
-    }
-    .controls {
-    touch-action: manipulation; /* Improve button responsiveness */
-}
+        @media (orientation: portrait) {
+            .tactic-board {
+                height: 60vw;
+                max-height: 70vh;
+            }
 
-/* Prevent text selection during interactions */
-.player, .ball, .goalie {
-    user-select: none;
-    -webkit-user-select: none;
-}
+            .controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
 
-/* Larger touch targets */
-button {
-    min-width: 48px;
-    min-height: 48px;
-}
+        @media (orientation: landscape) {
+            .tactic-board {
+                height: 70vh;
+            }
+        }
 
-/* Mobile menu adjustments */
-#settingsTab {
-    width: 90vw;
-    max-width: 300px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
+        @media (max-width: 768px) {
 
-/* Timeline scrolling improvements */
-.timeline {
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 15px;
-}
-}
+            .main-content {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+
+            .controls {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px;
+                background: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                overflow-x: auto;
+            }
+
+
+
+
+            .controls button {
+                flex: 1 1 auto;
+                min-width: 120px;
+                padding: 12px 8px;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            .speed-control {
+                flex-wrap: nowrap;
+                padding: 5px 10px;
+            }
+
+            #topButtons {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .timeline {
+                margin-top: 0;
+            }
+
+            .player,
+            .goalie {
+                min-width: 24px;
+                min-height: 24px;
+            }
+
+            button {
+                padding: 12px 24px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Add this at the end of your existing CSS */
+        @media only screen and (max-width: 428px) {
+
+            /* Targets iPhone 14 Pro Max and smaller */
+            .main-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .controls {
+                flex-direction: row !important;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                /* Firefox */
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .controls::-webkit-scrollbar {
+                display: none;
+                /* Hide scrollbar for Chrome/Safari */
+            }
+
+            .controls button {
+                flex: 0 0 auto;
+                min-width: 120px;
+                padding: 12px 10px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            .speed-control {
+                flex: 0 0 140px;
+                padding: 5px 10px;
+            }
+
+            #topButtons {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                gap: 8px;
+            }
+
+            /* Ensure timeline stays below */
+            .lower-section {
+                order: 3;
+                width: 100%;
+            }
+        }
+
+        /* For smaller iPhones (e.g., iPhone SE) */
+        @media only screen and (max-width: 350px) {
+            .controls button {
+                min-width: 110px;
+                padding: 10px 8px;
+                font-size: 0.8rem;
+            }
+
+            .speed-control {
+                flex: 0 0 120px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .tactic-board {
+                height: 70vh;
+                max-height: 400px;
+            }
+
+            .step-block {
+                min-width: 120px;
+            }
+
+            .controls {
+                touch-action: manipulation;
+                /* Improve button responsiveness */
+            }
+
+            /* Prevent text selection during interactions */
+            .player,
+            .ball,
+            .goalie {
+                user-select: none;
+                -webkit-user-select: none;
+            }
+
+            /* Larger touch targets */
+            button {
+                min-width: 48px;
+                min-height: 48px;
+            }
+
+            /* Mobile menu adjustments */
+            #settingsTab {
+                width: 90vw;
+                max-width: 300px;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            /* Timeline scrolling improvements */
+            .timeline {
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 15px;
+            }
+        }
 
         .main-content {
             display: flex;
@@ -312,7 +325,7 @@ button {
             /* Enhanced shadow on hover */
         }
 
-      
+
 
         .line {
             position: absolute;
@@ -354,7 +367,7 @@ button {
             font-weight: bold;
             font-size: 20px;
             transition: all 0s none;
-font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .player {
@@ -388,8 +401,8 @@ font-family: Arial, Helvetica, sans-serif;
         button {
             padding: 10px 20px;
             font-size: 1rem;
-            background-color: #007bff;
-            color: white;
+            background-color: #F8F9FA;
+            color: #0A0A0A;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -397,7 +410,7 @@ font-family: Arial, Helvetica, sans-serif;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #0044CC;
         }
 
         .controls {
@@ -586,9 +599,9 @@ font-family: Arial, Helvetica, sans-serif;
         }
 
 
-        #customizeTab{
+        #customizeTab {
 
-position: fixed;
+            position: fixed;
             top: 20%;
             left: 60%;
             transform: translateX(-50%);
@@ -605,6 +618,44 @@ position: fixed;
 
 
         }
+
+        svg {
+            transform: translateX(-10%);
+            transform: translateY(0%);
+        }
+
+        .kiwi-container {
+            width: 12vh;
+
+            height: 12vh;
+            /* Adjust this to scale */
+            transition: transform 0.3s ease;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+        }
+
+        /* Hover effect */
+        .kiwi-container:hover {
+            transform: scale(1.1) rotate(5deg);
+            animation-play-state: paused;
+        }
+
+        .kiwi-container:active {
+            animation: kiwiClick 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+
+        @keyframes colorPop {
+            50% {
+                filter: brightness(3) saturate(550%);
+            }
+        }
+
+        .kiwi-container:active {
+            animation: colorPop 0.3s ease;
+        }
     </style>
     <!-- Include the library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.min.js"></script>
@@ -612,140 +663,227 @@ position: fixed;
 </head>
 
 <body>
-    <div class="topButton">
-        <button id="settingsButton">Settings</button>
-        <button id="sixOnSixButton">6-on-6</button>
-        <button id="sixOnFiveButton">6-on-5</button>
-        <button id="sidelines">sidelines</button>
-        <button id="counter">Counter</button>
-        <button id="customize">Customize</button>
-        
-        <div id ="customizeTab">
-            
-            <label for="team1Color">Team 1 color</label>
-            <input type="color" id="team1Color" value="#ffcc00">
-            <br>
-            <label for="team2Color">Team 2 color</label>
-            <input type="color" id="team2Color" value="#00bfff">
-            <br>
-            <h5>Team 1 names</h3>
-            
-            <label for="player1T1">Player 1</label>
-            <input type="text" id="player1T1" value="1">
-            <br>
-            
-            <label for="player2T1">Player 2</label>
-            <input type="text" id="player2T1" value="2">
-            <label for="player3T1">Player 3</label>
-            <input type="text" id="player3T1" value="3">
-            <label for="player4T1">Player 4</label>
-            <input type="text" id="player4T1" value="4">
-            <label for="player5T1">Player 5</label>
-            <input type="text" id="player5T1" value="5">
-            <label for="player6T1">Player 6</label>
-            <input type="text" id="player6T1" value="6">
-            <label for="G1">Goalie  </label>
-            <input type="text" id="G1" value="G">
-            <h5>Team 2 names</h3>
+    <div class="kiwi-container">
+        <?xml version="1.0" encoding="utf-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512" width="13vh" height="13vh">
+            <path d="M 0.00 0.00 L 512.00 0.00 L 512.00 512.00 L 0.00 512.00 L 0.00 0.00 Z" fill="transparent"
+                opacity="1.00" stroke="transparent" stroke-width="0.25" />
+            <path
+                d="M 156.20 114.52 C 170.47 110.27 187.09 117.33 193.70 130.74 C 220.00 118.05 250.53 114.82 279.12 120.28 C 328.59 129.56 371.31 167.91 385.82 216.11 C 396.48 249.86 393.44 287.67 378.00 319.48 C 366.21 311.89 351.61 310.21 337.94 312.02 C 327.26 313.40 316.86 316.55 306.09 317.30 C 293.16 318.19 279.56 318.50 267.83 324.71 C 259.41 328.71 252.63 335.36 244.22 339.37 C 227.96 347.86 207.15 349.93 190.90 340.31 C 180.81 333.90 168.29 330.58 156.50 333.70 C 157.28 339.99 155.46 346.20 151.67 351.24 C 145.12 346.22 140.71 338.80 133.63 334.49 C 147.01 324.28 166.20 322.17 181.43 329.43 C 189.77 333.09 196.67 339.91 205.83 341.63 C 212.39 343.20 219.59 341.95 225.07 337.95 C 213.74 335.80 204.46 328.62 194.49 323.33 C 184.08 317.67 171.95 314.68 160.12 316.39 C 149.71 317.69 139.97 322.64 132.73 330.21 C 129.12 325.89 126.92 320.65 124.51 315.62 C 106.30 276.39 108.17 228.69 128.97 190.82 C 132.91 183.50 137.61 176.60 142.74 170.06 C 139.55 167.36 136.66 164.18 135.02 160.29 L 136.52 161.37 C 141.85 168.84 149.54 174.80 158.78 176.26 C 156.59 174.01 154.33 171.83 152.24 169.48 L 152.12 167.18 C 155.74 170.94 159.64 174.44 163.85 177.53 C 167.08 177.34 170.27 176.78 173.42 176.09 C 174.97 172.52 175.37 168.52 174.40 164.74 C 175.14 164.80 175.87 164.86 176.61 164.92 C 176.73 168.30 176.55 171.68 176.21 175.05 C 186.64 170.79 194.68 161.12 196.07 149.84 C 197.08 142.74 195.90 135.13 191.66 129.22 C 188.98 130.80 186.22 132.22 183.54 133.80 C 183.42 133.97 183.18 134.31 183.06 134.48 L 182.12 136.28 C 177.70 128.51 171.84 121.57 165.03 115.79 C 163.32 114.14 160.77 115.01 158.65 114.80 C 158.04 114.73 156.81 114.59 156.20 114.52 Z"
+                fill="#26252a" opacity="1.00" stroke="#26252a" stroke-width="0.25" />
+            <path
+                d="M 131.26 145.96 C 131.03 131.43 142.04 117.60 156.20 114.52 C 156.81 114.59 158.04 114.73 158.65 114.80 C 154.40 116.08 150.29 117.76 146.46 120.02 C 156.06 134.62 166.17 148.88 175.70 163.53 C 179.27 160.85 183.09 157.93 184.51 153.49 C 186.78 147.74 184.81 141.51 182.12 136.28 L 183.06 134.48 C 186.07 140.38 188.70 147.36 186.11 153.91 C 184.63 158.78 180.46 161.94 176.61 164.92 C 175.87 164.86 175.14 164.80 174.40 164.74 C 164.61 150.14 154.65 135.66 144.86 121.07 C 140.59 124.93 136.80 129.43 134.64 134.82 C 137.66 146.88 144.12 157.76 152.12 167.18 L 152.24 169.48 C 147.63 164.89 144.16 159.38 140.41 154.12 C 138.66 155.46 136.90 156.80 135.14 158.13 C 135.59 159.21 136.05 160.29 136.52 161.37 L 135.02 160.29 C 132.10 156.23 131.32 150.87 131.26 145.96 Z"
+                fill="#202020" opacity="1.00" stroke="#202020" stroke-width="0.25" />
+            <path
+                d="M 158.65 114.80 C 160.77 115.01 163.32 114.14 165.03 115.79 C 171.84 121.57 177.70 128.51 182.12 136.28 C 184.81 141.51 186.78 147.74 184.51 153.49 C 183.09 157.93 179.27 160.85 175.70 163.53 C 166.17 148.88 156.06 134.62 146.46 120.02 C 150.29 117.76 154.40 116.08 158.65 114.80 Z"
+                fill="#fefefe" opacity="1.00" stroke="#fefefe" stroke-width="0.25" />
+            <path
+                d="M 167.18 114.77 C 176.59 115.17 185.01 120.51 190.59 127.89 C 187.63 129.21 184.73 130.71 181.99 132.47 C 177.81 125.95 172.32 120.50 167.18 114.77 Z"
+                fill="#b5b5b6" opacity="1.00" stroke="#b5b5b6" stroke-width="0.25" />
+            <path
+                d="M 134.64 134.82 C 136.80 129.43 140.59 124.93 144.86 121.07 C 154.65 135.66 164.61 150.14 174.40 164.74 C 175.37 168.52 174.97 172.52 173.42 176.09 C 170.27 176.78 167.08 177.34 163.85 177.53 C 159.64 174.44 155.74 170.94 152.12 167.18 C 144.12 157.76 137.66 146.88 134.64 134.82 Z"
+                fill="#ffffff" opacity="1.00" stroke="#ffffff" stroke-width="0.25" />
+            <path
+                d="M 183.54 133.80 C 186.22 132.22 188.98 130.80 191.66 129.22 C 191.30 129.83 190.60 131.04 190.25 131.64 C 192.80 137.49 194.65 143.62 196.07 149.84 C 194.68 161.12 186.64 170.79 176.21 175.05 C 176.55 171.68 176.73 168.30 176.61 164.92 C 180.46 161.94 184.63 158.78 186.11 153.91 C 188.70 147.36 186.07 140.38 183.06 134.48 C 183.18 134.31 183.42 133.97 183.54 133.80 Z"
+                fill="#b9b9bb" opacity="1.00" stroke="#b9b9bb" stroke-width="0.25" />
+            <path
+                d="M 191.66 129.22 C 195.90 135.13 197.08 142.74 196.07 149.84 C 194.65 143.62 192.80 137.49 190.25 131.64 C 190.60 131.04 191.30 129.83 191.66 129.22 Z"
+                fill="#fefefe" opacity="1.00" stroke="#fefefe" stroke-width="0.25" />
+            <path
+                d="M 237.84 135.84 C 248.74 128.84 263.13 127.09 275.17 132.10 C 283.25 135.22 289.62 141.58 293.81 149.05 C 289.53 152.15 283.52 156.14 284.50 162.20 C 286.86 163.11 289.29 163.82 291.83 164.02 C 291.01 174.04 283.88 182.09 277.33 189.15 C 288.67 197.90 299.24 207.87 307.55 219.59 C 318.70 235.46 323.86 255.68 320.34 274.88 C 318.86 285.32 314.68 295.04 310.28 304.52 C 305.22 305.66 300.05 306.33 295.08 307.85 C 290.65 309.05 286.40 310.85 281.93 311.92 C 286.93 304.75 291.10 296.82 292.20 288.02 C 293.24 278.37 292.86 268.55 290.99 259.02 C 289.78 252.18 287.56 245.32 288.71 238.30 C 290.31 238.79 291.90 239.30 293.50 239.81 C 293.48 238.76 293.47 237.71 293.46 236.66 C 291.58 236.39 289.71 236.16 287.83 235.95 C 284.93 241.64 286.54 248.09 287.77 254.00 C 290.01 264.35 291.31 275.01 290.22 285.59 C 288.99 295.86 284.58 305.81 277.11 313.06 C 272.19 318.29 265.66 321.67 259.05 324.27 C 251.58 325.66 244.17 322.82 237.12 320.66 C 235.61 322.38 234.22 324.41 231.98 325.24 C 229.37 325.58 226.74 325.06 224.14 325.28 C 220.33 326.51 217.40 329.41 214.30 331.82 C 213.94 328.05 215.88 324.58 219.02 322.61 C 214.30 322.94 209.84 324.43 205.90 327.05 C 206.35 324.43 207.32 321.36 210.09 320.38 C 216.00 317.46 222.27 321.29 228.37 320.96 C 227.11 320.43 225.81 319.97 224.52 319.53 C 215.82 295.53 211.98 269.36 216.02 244.01 C 216.79 238.04 218.05 232.11 220.19 226.48 C 221.90 222.21 222.25 217.14 220.01 212.99 C 218.53 209.84 215.91 207.47 213.44 205.10 C 218.57 195.39 214.62 184.36 215.95 174.03 C 217.03 158.92 224.78 143.92 237.84 135.84 Z"
+                fill="#ffffff" opacity="1.00" stroke="#ffffff" stroke-width="0.25" />
+            <path
+                d="M 134.07 156.30 C 132.53 150.55 131.67 144.34 133.84 138.61 C 135.42 143.45 137.54 148.08 139.67 152.70 C 137.79 153.89 135.95 155.12 134.07 156.30 Z"
+                fill="#ffffff" opacity="1.00" stroke="#ffffff" stroke-width="0.25" />
+            <path
+                d="M 265.34 146.57 C 269.85 144.72 275.93 147.75 275.91 152.92 C 276.76 158.67 269.88 163.49 264.85 160.36 C 259.15 157.82 259.63 148.79 265.34 146.57 Z"
+                fill="#262628" opacity="1.00" stroke="#262628" stroke-width="0.25" />
+            <path
+                d="M 264.34 149.33 C 265.40 149.07 266.46 148.81 267.53 148.55 C 267.58 149.16 267.68 150.39 267.73 151.00 C 267.76 152.67 265.71 152.25 264.66 152.63 C 264.54 151.53 264.44 150.43 264.34 149.33 Z"
+                fill="#ffffff" opacity="1.00" stroke="#ffffff" stroke-width="0.25" />
+            <path
+                d="M 286.34 160.28 C 288.28 155.82 291.97 152.51 295.74 149.60 C 314.23 149.88 332.87 153.84 349.45 162.16 C 343.92 162.10 338.54 160.42 333.00 160.35 C 317.46 158.84 301.88 161.63 286.34 160.28 Z"
+                fill="#ffffff" opacity="1.00" stroke="#ffffff" stroke-width="0.25" />
+            <path
+                d="M 135.14 158.13 C 136.90 156.80 138.66 155.46 140.41 154.12 C 144.16 159.38 147.63 164.89 152.24 169.48 C 154.33 171.83 156.59 174.01 158.78 176.26 C 149.54 174.80 141.85 168.84 136.52 161.37 C 136.05 160.29 135.59 159.21 135.14 158.13 Z"
+                fill="#b6b6b8" opacity="1.00" stroke="#b6b6b8" stroke-width="0.25" />
+            <path
+                d="M 168.28 189.64 C 166.90 185.92 166.76 181.79 168.27 178.09 C 171.27 181.33 173.79 185.06 177.36 187.74 C 184.63 193.83 193.57 197.27 202.25 200.81 C 208.43 203.63 214.85 207.41 217.96 213.73 C 220.27 217.60 219.73 222.43 218.19 226.48 C 215.41 234.04 212.63 241.78 212.37 249.92 C 212.16 251.68 212.52 254.55 210.11 254.86 C 207.95 256.24 205.76 253.63 203.61 254.78 C 200.54 256.08 197.21 256.67 193.95 255.70 C 194.32 251.67 197.35 248.77 199.33 245.46 C 192.43 247.25 184.52 249.59 177.79 246.11 C 179.46 241.74 184.40 240.21 187.11 236.68 C 182.76 237.35 178.25 237.96 173.91 236.89 C 172.55 236.73 171.75 235.61 170.91 234.69 C 166.45 234.46 161.88 233.66 158.29 230.82 C 161.41 227.24 165.95 225.58 170.11 223.57 C 163.26 223.43 155.87 222.89 150.40 218.28 C 150.44 217.91 150.51 217.18 150.55 216.82 C 154.98 215.29 159.54 214.20 164.09 213.10 C 157.18 212.00 148.93 209.93 146.17 202.63 C 151.15 202.71 156.01 203.90 160.94 204.50 C 156.40 201.40 151.69 197.79 150.20 192.20 C 152.20 192.37 154.18 192.71 156.15 193.13 C 155.31 192.14 154.49 191.15 153.66 190.16 C 153.19 188.67 152.72 187.19 152.27 185.70 C 157.72 186.54 163.04 187.97 168.28 189.64 Z"
+                fill="#fefefe" opacity="1.00" stroke="#fefefe" stroke-width="0.25" />
+            <path
+                d="M 287.77 254.00 C 286.54 248.09 284.93 241.64 287.83 235.95 C 289.71 236.16 291.58 236.39 293.46 236.66 C 293.47 237.71 293.48 238.76 293.50 239.81 C 291.90 239.30 290.31 238.79 288.71 238.30 C 287.56 245.32 289.78 252.18 290.99 259.02 C 292.86 268.55 293.24 278.37 292.20 288.02 C 291.54 287.21 290.87 286.40 290.22 285.59 C 291.31 275.01 290.01 264.35 287.77 254.00 Z"
+                fill="#131314" opacity="1.00" stroke="#131314" stroke-width="0.25" />
+            <path
+                d="M 323.51 301.54 C 328.20 296.73 333.80 291.22 341.05 291.58 C 344.48 291.50 346.76 294.39 348.72 296.80 C 344.75 296.46 340.48 295.84 336.84 297.90 C 332.12 300.59 329.39 306.07 324.01 307.74 C 320.67 309.15 317.10 308.17 313.87 307.01 C 317.39 305.83 320.99 304.39 323.51 301.54 Z"
+                fill="#ffffff" opacity="1.00" stroke="#ffffff" stroke-width="0.25" />
+            <path
+                d="M 349.81 323.86 C 363.78 320.17 379.83 322.37 390.93 332.12 C 390.12 332.83 389.31 333.55 388.51 334.26 C 385.00 331.39 380.87 329.41 376.51 328.20 C 373.34 333.50 369.93 338.66 366.45 343.77 C 366.20 343.75 365.69 343.73 365.44 343.72 C 363.45 340.24 362.53 336.25 362.39 332.27 C 351.79 329.60 341.25 333.49 331.42 337.18 C 325.53 339.38 318.99 341.30 312.78 339.21 C 318.33 338.52 323.32 335.88 328.21 333.33 C 335.09 329.52 342.21 325.98 349.81 323.86 Z"
+                fill="#262529" opacity="1.00" stroke="#262529" stroke-width="0.25" />
+            <path
+                d="M 305.57 350.51 C 316.19 343.66 329.75 340.84 342.05 344.20 C 349.05 346.16 356.05 351.84 355.66 359.77 C 343.84 347.57 323.87 347.25 309.82 355.65 C 301.33 360.29 295.28 368.23 286.80 372.89 C 283.84 374.22 280.85 375.53 277.69 376.27 C 288.08 368.85 294.59 357.19 305.57 350.51 Z"
+                fill="#262529" opacity="1.00" stroke="#262529" stroke-width="0.25" />
+            <path
+                d="M 338.60 363.25 C 349.23 366.59 360.04 369.42 371.06 371.09 C 375.54 371.69 380.07 371.87 384.52 372.67 C 372.47 374.05 359.86 373.87 348.30 369.83 C 344.65 368.41 340.55 366.94 338.60 363.25 Z"
+                fill="#cbcdcc" opacity="1.00" stroke="#cbcdcc" stroke-width="0.25" />
+            <path
+                d="M 125.93 372.70 C 142.06 372.21 157.94 368.97 173.31 364.20 C 172.38 365.59 171.35 366.99 169.81 367.75 C 163.22 371.51 155.57 373.00 148.08 373.51 C 140.70 373.67 133.23 374.08 125.93 372.70 Z"
+                fill="#cacbcb" opacity="1.00" stroke="#cacbcb" stroke-width="0.25" />
+            <path
+                d="M 309.21 370.70 C 321.41 373.71 333.42 377.88 346.00 379.11 C 349.34 379.39 352.69 379.65 356.01 380.15 C 345.73 381.25 335.21 380.94 325.08 378.83 C 319.38 377.26 312.83 375.84 309.21 370.70 Z"
+                fill="#cdcdcd" opacity="1.00" stroke="#cdcdcd" stroke-width="0.25" />
+            <path
+                d="M 154.96 380.85 C 171.09 380.01 186.76 375.93 202.35 372.04 C 198.21 376.75 191.93 378.56 186.02 379.85 C 175.83 381.85 165.25 382.05 154.96 380.85 Z"
+                fill="#cecece" opacity="1.00" stroke="#cecece" stroke-width="0.25" />
+        </svg>
+    </div>
+   
+        <div class="topButton">
+            <button id="settingsButton">Settings</button>
+            <button id="sixOnSixButton">6-on-6</button>
+            <button id="sixOnFiveButton">6-on-5</button>
+            <button id="sidelines">sidelines</button>
+            <button id="counter">Counter</button>
+            <button id="customize">Customize</button>
+
+            <div id="customizeTab">
+
+                <label for="team1Color">Team 1 color</label>
+                <input type="color" id="team1Color" value="#ffcc00">
                 <br>
-            <label for="player1T2">Player 1</label>
-            <input type="text" id="player1T1" value="1">
-            <label for="player2T2">Player 2</label>
-            <input type="text" id="player2T2" value="2">
-            <label for="player3T2">Player 3</label>
-            <input type="text" id="player3T2" value="3">
-            <label for="player4T2">Player 4</label>
-            <input type="text" id="player4T2" value="4">
-            <label for="player5T2">Player 5</label>
-            <input type="text" id="player5T2" value="5">
-            <label for="player6T2">Player 6</label>
-            <input type="text" id="player6T2" value="6">
-            <label for="G2">Goalie  </label>
-            <input type="text" id="G2" value="G">
-            <button id="customizeExit">Exit</button>
+                <label for="team2Color">Team 2 color</label>
+                <input type="color" id="team2Color" value="#00bfff">
+                <br>
+                <h5>Team 1 names</h3>
+
+                    <label for="player1T1">Player 1</label>
+                    <input type="text" id="player1T1" value="1">
+                    <br>
+
+                    <label for="player2T1">Player 2</label>
+                    <input type="text" id="player2T1" value="2">
+                    <label for="player3T1">Player 3</label>
+                    <input type="text" id="player3T1" value="3">
+                    <label for="player4T1">Player 4</label>
+                    <input type="text" id="player4T1" value="4">
+                    <label for="player5T1">Player 5</label>
+                    <input type="text" id="player5T1" value="5">
+                    <label for="player6T1">Player 6</label>
+                    <input type="text" id="player6T1" value="6">
+                    <label for="G1">Goalie </label>
+                    <input type="text" id="G1" value="G">
+                    <h5>Team 2 names</h3>
+                        <br>
+                        <label for="player1T2">Player 1</label>
+                        <input type="text" id="player1T1" value="1">
+                        <label for="player2T2">Player 2</label>
+                        <input type="text" id="player2T2" value="2">
+                        <label for="player3T2">Player 3</label>
+                        <input type="text" id="player3T2" value="3">
+                        <label for="player4T2">Player 4</label>
+                        <input type="text" id="player4T2" value="4">
+                        <label for="player5T2">Player 5</label>
+                        <input type="text" id="player5T2" value="5">
+                        <label for="player6T2">Player 6</label>
+                        <input type="text" id="player6T2" value="6">
+                        <label for="G2">Goalie </label>
+                        <input type="text" id="G2" value="G">
+                        <button id="customizeExit">Exit</button>
+
+
+            </div>
+            <div id="settingsTab">
+                <div class="setting">
+                    <label for="colorPicker">Line Color</label>
+                    <input type="color" id="colorPicker" value="#000000">
+                </div>
+                <div class="setting">
+                    <label for="lineThickness">Line Thickness</label>
+                    <input type="range" id="lineThickness" min="1" max="10" value="2">
+                </div>
+                <div class="setting">
+                    <label for="drawingMode">Drawing Mode</label>
+                    <select id="drawingMode">
+                        <option value="freehand">Freehand</option>
+                        <option value="straight">Straight Line</option>
+                    </select>
+                </div>
+                <button id="closeSettings">Close Settings</button>
+
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="tactic-board" id="tacticBoard">
+                <canvas id="drawingCanvas"></canvas>
+                <div class="line two-meter"></div>
+                <div class="line six-meter"></div>
+
+                <div class="goal"></div>
+
+                <!-- Team 1 Players -->
+                <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%"
+                    data-start-left2="15.49%" data-start-top="13%" data-start-left="12%" data-start-left3="0.5%"
+                    data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="76%">1</div>
+                <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%"
+                    data-start-left2="38.14%" data-start-top="35%" data-start-left="25%" data-start-left3="0.5%"
+                    data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="76%">2</div>
+                <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
+                    data-start-left2="57.62%" data-start-top="45%" data-start-left="50%" data-start-left3="0.5%"
+                    data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="76%">3</div>
+                <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
+                    data-start-left2="37%" data-start-top="35%" data-start-left="75%" data-start-left3="0.5%"
+                    data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="76%">4</div>
+                <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
+                    data-start-left2="58%" data-start-top="13%" data-start-left="88%" data-start-left3="0.5%"
+                    data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="76%">5</div>
+                <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
+                    data-start-left2="79.06%" data-start-top="20%" data-start-left="50%" data-start-left3="0.5%"
+                    data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="86%">6</div>
+
+                <!-- Team 2 Players -->
+                <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
+                    data-start-left2="47.27%" data-start-top="13%" data-start-left="18%" data-start-left3="94%"
+                    data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="16%">1</div>
+                <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
+                    data-start-left2="32.57%" data-start-top="32%" data-start-left="30%" data-start-left3="94%"
+                    data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="16%">2</div>
+                <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;" data-start-top2="11.77%"
+                    data-start-left2="63.61%" data-start-top="38%" data-start-left="50%" data-start-left3="94%"
+                    data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="16%">3</div>
+                <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
+                    data-start-left2="57.67%" data-start-top="32%" data-start-left="70%" data-start-left3="94%"
+                    data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="16%">4</div>
+                <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
+                    data-start-left2="47.27%" data-start-top="13%" data-start-left="82%" data-start-left3="94%"
+                    data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="16%">5</div>
+                <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
+                    data-start-left2="37.62%" data-start-top="12%" data-start-left="50%" data-start-left3="94%"
+                    data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="10%">6</div>
+
+                <!-- Ball and Goalie -->
+                <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%" data-start-left2="40%"
+                    data-start-top="50%" data-start-left="50%"></div>
+                <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%" data-start-left2="50%"
+                    data-start-top="0%" data-start-left="50%">G</div>
+            </div>
+
+            <div class="controls">
+                <button id="addstep">➕ Snapshot</button>
+                <button id="playAnimationButton">▶️ Play</button>
+                <button id="savePlay">💾 Save locally</button>
+                <button id="loadPlay">📂 Load local save</button>
+                <button id="exportPlay">Export Play (.tactic)</button>
+                <input type="file" id="importInput" accept=".tactic" style="display: none;" />
+                <button id="importPlay" onclick="document.getElementById('importInput').click()">Import Play
+                    (.tactic)</button>
+                <div class="speed-control">
+                    <label>Speed:</label>
+                    <input type="range" id="animationSpeed" min="0.5" max="3" step="0.5" value="1">
+                    <span id="speedValue">1x</span>
+                </div>
+            </div>
 
 
         </div>
-        <div id="settingsTab">
-            <div class="setting">
-                <label for="colorPicker">Line Color</label>
-                <input type="color" id="colorPicker" value="#000000">
-            </div>
-            <div class="setting">
-                <label for="lineThickness">Line Thickness</label>
-                <input type="range" id="lineThickness" min="1" max="10" value="2">
-            </div>
-            <div class="setting">
-                <label for="drawingMode">Drawing Mode</label>
-                <select id="drawingMode">
-                    <option value="freehand">Freehand</option>
-                    <option value="straight">Straight Line</option>
-                </select>
-            </div>
-            <button id="closeSettings">Close Settings</button>
-            
-        </div>
-    </div>
-    <div class="main-content">
-        <div class="tactic-board" id="tacticBoard">
-            <canvas id="drawingCanvas"></canvas>
-            <div class="line two-meter"></div>
-            <div class="line six-meter"></div>
-
-            <div class="goal"></div>
-
-            <!-- Team 1 Players -->
-            <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%"
-                data-start-left2="15.49%" data-start-top="13%" data-start-left="12%" data-start-left3="0.5%" data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="76%">1</div>
-            <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%"
-                data-start-left2="38.14%" data-start-top="35%" data-start-left="25%" data-start-left3="0.5%" data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="76%" >2</div>
-            <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
-                data-start-left2="57.62%" data-start-top="45%" data-start-left="50%" data-start-left3="0.5%" data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="76%">3</div>
-            <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
-                data-start-left2="37%" data-start-top="35%" data-start-left="75%" data-start-left3="0.5%" data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="76%">4</div>
-            <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
-                data-start-left2="58%" data-start-top="13%" data-start-left="88%" data-start-left3="0.5%" data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="76%">5</div>
-            <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
-                data-start-left2="79.06%" data-start-top="20%" data-start-left="50%" data-start-left3="0.5%" data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="86%">6</div>
-
-            <!-- Team 2 Players -->
-            <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
-                data-start-left2="47.27%" data-start-top="13%" data-start-left="18%" data-start-left3="94%" data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="16%">1</div>
-            <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
-                data-start-left2="32.57%" data-start-top="32%" data-start-left="30%" data-start-left3="94%" data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="16%">2</div>
-            <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;" data-start-top2="11.77%"
-                data-start-left2="63.61%" data-start-top="38%" data-start-left="50%" data-start-left3="94%" data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="16%">3</div>
-            <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
-                data-start-left2="57.67%" data-start-top="32%" data-start-left="70%" data-start-left3="94%" data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="16%">4</div>
-            <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
-                data-start-left2="47.27%" data-start-top="13%" data-start-left="82%" data-start-left3="94%" data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="16%">5</div>
-            <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
-                data-start-left2="37.62%" data-start-top="12%" data-start-left="50%" data-start-left3="94%" data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="10%">6</div>
-
-            <!-- Ball and Goalie -->
-            <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%" data-start-left2="40%"
-                data-start-top="50%" data-start-left="50%"></div>
-            <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%" data-start-left2="50%"
-                data-start-top="0%" data-start-left="50%">G</div>
-        </div>
-
-        <div class="controls">
-            <button id="addstep">➕ Add Step</button>
-            <button id="playAnimationButton">▶️ Play</button>
-            <button id="savePlay">💾 Save</button>
-            <button id="loadPlay">📂 Load</button>
-            <button id="exportPlay">Export Play</button>
-<input type="file" id="importInput" accept=".tactic" style="display: none;" />
-<button id="importPlay" onclick="document.getElementById('importInput').click()">Import Play</button>
-            <div class="speed-control">
-                <label>Speed:</label>
-                <input type="range" id="animationSpeed" min="0.5" max="3" step="0.5" value="1">
-                <span id="speedValue">1x</span>
-            </div>
-        </div>
-
-
-    </div>
     </div>
     </div>
     <div class="lower-section">
@@ -761,7 +899,13 @@ position: fixed;
             </div>
         </div>
     </div>
+
     <script>
+
+
+
+
+
         // Modify the "6-on-6" button functionality
         const sixOnSixButton = document.getElementById('sixOnSixButton'); // Use the existing button
         sixOnSixButton.addEventListener('click', () => {
@@ -825,45 +969,45 @@ position: fixed;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             lines = [];
         });
-        
+
         function dragStartTouch(e) {
-    e.preventDefault();
-    const target = e.target;
-    const tacticBoard = target.parentElement;
-    const boardRect = tacticBoard.getBoundingClientRect();
-    const touch = e.touches[0];
-    
-    // Get initial element position in viewport coordinates
-    const elementRect = target.getBoundingClientRect();
-    const startX = touch.clientX - elementRect.left;
-    const startY = touch.clientY - elementRect.top;
+            e.preventDefault();
+            const target = e.target;
+            const tacticBoard = target.parentElement;
+            const boardRect = tacticBoard.getBoundingClientRect();
+            const touch = e.touches[0];
 
-    function dragMoveTouch(e) {
-        e.preventDefault();
-        const touch = e.touches[0];
-        const boardWidth = boardRect.width;
-        const boardHeight = boardRect.height;
-        
-        // Calculate new position relative to board
-        let newX = touch.clientX - startX - boardRect.left;
-        let newY = touch.clientY - startY - boardRect.top;
-        
-        // Convert to percentages
-        newX = Math.max(0, Math.min(newX, boardWidth)) / boardWidth * 100;
-        newY = Math.max(0, Math.min(newY, boardHeight)) / boardHeight * 100;
-        
-        target.style.left = `${newX}%`;
-        target.style.top = `${newY}%`;
-    }
+            // Get initial element position in viewport coordinates
+            const elementRect = target.getBoundingClientRect();
+            const startX = touch.clientX - elementRect.left;
+            const startY = touch.clientY - elementRect.top;
 
-    function dragEndTouch() {
-        document.removeEventListener('touchmove', dragMoveTouch, { passive: false });
-        document.removeEventListener('touchend', dragEndTouch);
-    }
+            function dragMoveTouch(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const boardWidth = boardRect.width;
+                const boardHeight = boardRect.height;
 
-    document.addEventListener('touchmove', dragMoveTouch, { passive: false });
-    document.addEventListener('touchend', dragEndTouch);
-}        
+                // Calculate new position relative to board
+                let newX = touch.clientX - startX - boardRect.left;
+                let newY = touch.clientY - startY - boardRect.top;
+
+                // Convert to percentages
+                newX = Math.max(0, Math.min(newX, boardWidth)) / boardWidth * 100;
+                newY = Math.max(0, Math.min(newY, boardHeight)) / boardHeight * 100;
+
+                target.style.left = `${newX}%`;
+                target.style.top = `${newY}%`;
+            }
+
+            function dragEndTouch() {
+                document.removeEventListener('touchmove', dragMoveTouch, { passive: false });
+                document.removeEventListener('touchend', dragEndTouch);
+            }
+
+            document.addEventListener('touchmove', dragMoveTouch, { passive: false });
+            document.addEventListener('touchend', dragEndTouch);
+        }
 
 
         const elements = document.querySelectorAll('.player, .ball, .goalie');
@@ -897,72 +1041,72 @@ position: fixed;
         });
 
         document.getElementById('exportPlay').addEventListener('click', exportPlay);
-document.getElementById('importInput').addEventListener('change', (e) => {
-    if (e.target.files[0]) {
-        importPlay(e.target.files[0]);
-    }
-});
+        document.getElementById('importInput').addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                importPlay(e.target.files[0]);
+            }
+        });
 
         // Export Function
-function exportPlay() {
-    const data = JSON.stringify({
-        version: "1.0",
-        steps: steps,
-        offsets: { x: POSITION_OFFSET_X, y: POSITION_OFFSET_Y }
-    }, null, 2);
+        function exportPlay() {
+            const data = JSON.stringify({
+                version: "1.0",
+                steps: steps,
+                offsets: { x: POSITION_OFFSET_X, y: POSITION_OFFSET_Y }
+            }, null, 2);
 
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `play_${new Date().toISOString().slice(0,10)}.tactic`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
-function importPlay(file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        try {
-            const data = JSON.parse(e.target.result);
-            
-            // Validate file structure
-            if (!data.steps || !Array.isArray(data.steps)) {
-                throw new Error('Invalid file format');
-            }
-
-            // Clear current steps
-            steps = [];
-
-            // Load steps with image reviver
-            data.steps.forEach(step => {
-                // Create new step object
-                const newStep = {
-                    ...step,
-                    // Convert screenshot data to blob if needed
-                    screenshot: step.screenshot.startsWith('blob:') ? 
-                        step.screenshot : 
-                        `data:image/png;base64,${step.screenshot}`
-                };
-                
-                steps.push(newStep);
-            });
-
-            if (data.offsets) {
-                POSITION_OFFSET_X = data.offsets.x;
-                POSITION_OFFSET_Y = data.offsets.y;
-            }
-
-            updateTimeline();
-            alert('Play imported successfully!');
-        } catch (error) {
-            alert('Error importing play: ' + error.message);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `play_${new Date().toISOString().slice(0, 10)}.tactic`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
-    };
-    reader.readAsText(file);
-}
+
+        function importPlay(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+
+                    // Validate file structure
+                    if (!data.steps || !Array.isArray(data.steps)) {
+                        throw new Error('Invalid file format');
+                    }
+
+                    // Clear current steps
+                    steps = [];
+
+                    // Load steps with image reviver
+                    data.steps.forEach(step => {
+                        // Create new step object
+                        const newStep = {
+                            ...step,
+                            // Convert screenshot data to blob if needed
+                            screenshot: step.screenshot.startsWith('blob:') ?
+                                step.screenshot :
+                                `data:image/png;base64,${step.screenshot}`
+                        };
+
+                        steps.push(newStep);
+                    });
+
+                    if (data.offsets) {
+                        POSITION_OFFSET_X = data.offsets.x;
+                        POSITION_OFFSET_Y = data.offsets.y;
+                    }
+
+                    updateTimeline();
+                    alert('Play imported successfully!');
+                } catch (error) {
+                    alert('Error importing play: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
 
         let steps = [];
         let isAnimating = false;
@@ -1079,61 +1223,61 @@ function importPlay(file) {
 
         // Animation System
         document.getElementById('playAnimationButton').addEventListener('click', async () => {
-    if (!isAnimating && steps.length > 0) { // Changed to check for any steps
-        isAnimating = true;
-        try {
-            // Start by showing the first step immediately
-            const firstStep = steps[0];
+            if (!isAnimating && steps.length > 0) { // Changed to check for any steps
+                isAnimating = true;
+                try {
+                    // Start by showing the first step immediately
+                    const firstStep = steps[0];
+                    elements.forEach(element => {
+                        const pos = firstStep.positions[element.id];
+                        element.style.transition = 'none';
+                        element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
+                        element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
+                    });
+
+                    // Force synchronous layout update
+                    await new Promise(resolve => requestAnimationFrame(resolve));
+
+                    // Animate through all steps sequentially
+                    for (let i = 0; i < steps.length; i++) {
+                        const currentStep = steps[i];
+
+                        // If there's a next step, animate to it
+                        if (i < steps.length - 1) {
+                            const nextStep = steps[i + 1];
+
+                            // Set up transition for animation
+                            elements.forEach(element => {
+                                const targetPos = nextStep.positions[element.id];
+                                element.style.transition = `all ${currentStep.duration / animationSpeed}s ease-in-out`;
+                                element.style.top = `${targetPos.top}%`;
+                                element.style.left = `${targetPos.left}%`;
+                            });
+
+                            // Wait for animation duration
+                            await new Promise(resolve =>
+                                setTimeout(resolve, currentStep.duration * 1000 / animationSpeed)
+                            );
+                        }
+                    }
+                } finally {
+                    isAnimating = false;
+                }
+            }
+        });
+
+        // Jump to Step
+        function jumpToStep(index) {
+            const step = steps[index];
             elements.forEach(element => {
-                const pos = firstStep.positions[element.id];
+                const pos = step.positions[element.id];
                 element.style.transition = 'none';
                 element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
                 element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
             });
-
-            // Force synchronous layout update
-            await new Promise(resolve => requestAnimationFrame(resolve));
-
-            // Animate through all steps sequentially
-            for (let i = 0; i < steps.length; i++) {
-                const currentStep = steps[i];
-                
-                // If there's a next step, animate to it
-                if (i < steps.length - 1) {
-                    const nextStep = steps[i + 1];
-                    
-                    // Set up transition for animation
-                    elements.forEach(element => {
-                        const targetPos = nextStep.positions[element.id];
-                        element.style.transition = `all ${currentStep.duration / animationSpeed}s ease-in-out`;
-                        element.style.top = `${targetPos.top}%`;
-                        element.style.left = `${targetPos.left}%`;
-                    });
-
-                    // Wait for animation duration
-                    await new Promise(resolve => 
-                        setTimeout(resolve, currentStep.duration * 1000 / animationSpeed)
-                    );
-                }
-            }
-        } finally {
-            isAnimating = false;
+            // Force layout update
+            void element.offsetHeight; // This triggers a reflow
         }
-    }
-});
-
-        // Jump to Step
-        function jumpToStep(index) {
-    const step = steps[index];
-    elements.forEach(element => {
-        const pos = step.positions[element.id];
-        element.style.transition = 'none';
-        element.style.top = `calc(${pos.top}% + ${POSITION_OFFSET_Y}px)`;
-        element.style.left = `calc(${pos.left}% + ${POSITION_OFFSET_X}px)`;
-    });
-    // Force layout update
-    void element.offsetHeight; // This triggers a reflow
-}
 
         // Modal Handling
         function closeModal() {
@@ -1220,10 +1364,10 @@ function importPlay(file) {
         // Draggable Functionality
         elements.forEach(element => {
             element.addEventListener('mousedown', startDrag);
-   
 
-    // Touch event listeners
-    element.addEventListener('touchstart', dragStartTouch);
+
+            // Touch event listeners
+            element.addEventListener('touchstart', dragStartTouch);
 
         });
 
@@ -1412,68 +1556,68 @@ function importPlay(file) {
 
 
 
-// Get elements
-const team1Color = document.getElementById('team1Color');
-const team2Color = document.getElementById('team2Color');
-const customizeExit = document.getElementById('customizeExit');
-const customizeTab = document.getElementById('customizeTab');
-const customize = document.getElementById('customize');
+        // Get elements
+        const team1Color = document.getElementById('team1Color');
+        const team2Color = document.getElementById('team2Color');
+        const customizeExit = document.getElementById('customizeExit');
+        const customizeTab = document.getElementById('customizeTab');
+        const customize = document.getElementById('customize');
 
-// Fix 1: Use proper property names and assignment
-function updateTeamColors() {
-    // Team 1
-    document.querySelectorAll('.team1').forEach(element => {
-        element.style.backgroundColor = team1Color.value;
-    });
-    
-    // Team 2
-    document.querySelectorAll('.team2').forEach(element => {
-        element.style.backgroundColor = team2Color.value;
-    });
-}
+        // Fix 1: Use proper property names and assignment
+        function updateTeamColors() {
+            // Team 1
+            document.querySelectorAll('.team1').forEach(element => {
+                element.style.backgroundColor = team1Color.value;
+            });
 
-// Fix 2: Add event listeners for color changes
-team1Color.addEventListener('input', updateTeamColors);
-team2Color.addEventListener('input', updateTeamColors);
+            // Team 2
+            document.querySelectorAll('.team2').forEach(element => {
+                element.style.backgroundColor = team2Color.value;
+            });
+        }
 
-// Fix 3: Text customization
-function updatePlayerNames() {
-    // Team 1
-    document.getElementById('player1-team1').textContent = document.getElementById('player1T1').value;
-    document.getElementById('player2-team1').textContent = document.getElementById('player2T1').value;
-    document.getElementById('player3-team1').textContent = document.getElementById('player3T1').value;
-    document.getElementById('player4-team1').textContent = document.getElementById('player4T1').value;
-    document.getElementById('player5-team1').textContent = document.getElementById('player5T1').value;
-    document.getElementById('player6-team1').textContent = document.getElementById('player6T1').value;
-    document.getElementById('goalie').textContent = document.getElementById('G1').value;
+        // Fix 2: Add event listeners for color changes
+        team1Color.addEventListener('input', updateTeamColors);
+        team2Color.addEventListener('input', updateTeamColors);
 
-    // Team 2
-    document.getElementById('player1-team2').textContent = document.getElementById('player1T2').value;
-    document.getElementById('player2-team2').textContent = document.getElementById('player2T2').value;
-    document.getElementById('player3-team2').textContent = document.getElementById('player3T2').value;
-    document.getElementById('player4-team2').textContent = document.getElementById('player4T2').value;
-    document.getElementById('player5-team2').textContent = document.getElementById('player5T2').value;
-    document.getElementById('player6-team2').textContent = document.getElementById('player6T2').value;
-    document.getElementById('goalie').textContent = document.getElementById('G2').value;
-}
+        // Fix 3: Text customization
+        function updatePlayerNames() {
+            // Team 1
+            document.getElementById('player1-team1').textContent = document.getElementById('player1T1').value;
+            document.getElementById('player2-team1').textContent = document.getElementById('player2T1').value;
+            document.getElementById('player3-team1').textContent = document.getElementById('player3T1').value;
+            document.getElementById('player4-team1').textContent = document.getElementById('player4T1').value;
+            document.getElementById('player5-team1').textContent = document.getElementById('player5T1').value;
+            document.getElementById('player6-team1').textContent = document.getElementById('player6T1').value;
+            document.getElementById('goalie').textContent = document.getElementById('G1').value;
 
-// Fix 4: Add input event listeners for all text fields
-document.querySelectorAll('#customizeTab input[type="text"]').forEach(input => {
-    input.addEventListener('input', updatePlayerNames);
-});
+            // Team 2
+            document.getElementById('player1-team2').textContent = document.getElementById('player1T2').value;
+            document.getElementById('player2-team2').textContent = document.getElementById('player2T2').value;
+            document.getElementById('player3-team2').textContent = document.getElementById('player3T2').value;
+            document.getElementById('player4-team2').textContent = document.getElementById('player4T2').value;
+            document.getElementById('player5-team2').textContent = document.getElementById('player5T2').value;
+            document.getElementById('player6-team2').textContent = document.getElementById('player6T2').value;
+            document.getElementById('goalie').textContent = document.getElementById('G2').value;
+        }
 
-// Modal handling
-customize.addEventListener('click', () => {
-    customizeTab.style.display = 'block';
-});
+        // Fix 4: Add input event listeners for all text fields
+        document.querySelectorAll('#customizeTab input[type="text"]').forEach(input => {
+            input.addEventListener('input', updatePlayerNames);
+        });
 
-customizeExit.addEventListener('click', () => {
-    customizeTab.style.display = 'none';
-});
+        // Modal handling
+        customize.addEventListener('click', () => {
+            customizeTab.style.display = 'block';
+        });
 
-// Initial update
-updateTeamColors();
-updatePlayerNames();
+        customizeExit.addEventListener('click', () => {
+            customizeTab.style.display = 'none';
+        });
+
+        // Initial update
+        updateTeamColors();
+        updatePlayerNames();
     </script>
 </body>
 
