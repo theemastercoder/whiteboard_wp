@@ -266,6 +266,7 @@
 
  <script src="js/common.js"></script>
  <script>
+localStorage.removeItem('playData');
 
 
     // Initialize first tab as active
@@ -491,8 +492,8 @@ document.getElementById("playbook").addEventListener("click", () => {
         const canvas = document.getElementById('drawingCanvas');
         const ctx = canvas.getContext('2d');
         // Manual correction offsets
-        const POSITION_OFFSET_X = 0; // Adjust these values as needed
-        const POSITION_OFFSET_Y = 0; // Positive values shift right/down
+        let POSITION_OFFSET_X = 0;  // Adjust these values as needed
+        let POSITION_OFFSET_Y = 0; // Positive values shift right/down
         // Speed Control
         document.getElementById('animationSpeed').addEventListener('input', (e) => {
             animationSpeed = e.target.value;
