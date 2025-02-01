@@ -9,7 +9,7 @@
     <title>Water Polo Tactic Board Pro</title>
     
     <!-- Include the library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.min.js"></script>
+
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 
@@ -105,6 +105,9 @@
             <button id="sidelines">Custom</button>
             <button id="counter">Offense to defense</button>
             <button id="customize">Customize Players</button>
+            <button id="positionButton">Player pos</button>
+            <!-- Change existing button to a toggle -->
+<button id="courtModeButton" class="court-mode-half">Full Court</button>
 
             <div id="customizeTab">
 
@@ -132,22 +135,22 @@
                     <input type="text" id="player6T1" value="6">
                     <label for="G1">Goalie </label>
                     <input type="text" id="G1" value="G">
-                    <h5>Team 2 names</h3>
-                        <br>
-                        <label for="player1T2">Player 1</label>
-                        <input type="text" id="player1T1" value="1">
-                        <label for="player2T2">Player 2</label>
-                        <input type="text" id="player2T2" value="2">
-                        <label for="player3T2">Player 3</label>
-                        <input type="text" id="player3T2" value="3">
-                        <label for="player4T2">Player 4</label>
-                        <input type="text" id="player4T2" value="4">
-                        <label for="player5T2">Player 5</label>
-                        <input type="text" id="player5T2" value="5">
-                        <label for="player6T2">Player 6</label>
-                        <input type="text" id="player6T2" value="6">
-                        <label for="G2">Goalie </label>
-                        <input type="text" id="G2" value="G">
+                    <h5>Team 2 names</h5>  <!-- Also fixed closing tag from </h3> to </h5> -->
+<br>
+<label for="player1T2">Player 1</label>
+<input type="text" id="player1T2" value="1">  <!-- Fixed ID -->
+<label for="player2T2">Player 2</label>
+<input type="text" id="player2T2" value="2">
+<label for="player3T2">Player 3</label>
+<input type="text" id="player3T2" value="3">
+<label for="player4T2">Player 4</label>
+<input type="text" id="player4T2" value="4">
+<label for="player5T2">Player 5</label>
+<input type="text" id="player5T2" value="5">
+<label for="player6T2">Player 6</label>
+<input type="text" id="player6T2" value="6">
+<label for="G2">Goalie </label>
+<input type="text" id="G2" value="G">
                         <button id="customizeExit">Exit</button>
 
 
@@ -175,56 +178,62 @@
         <div class="main-content">
             <div class="tactic-board" id="tacticBoard">
                 <canvas id="drawingCanvas"></canvas>
-                <div class="line two-meter"></div>
-                <div class="line six-meter"></div>
+                <div class="line two-meter" id="1twoMeter"></div>
+                <div class="line six-meter" id="1sixMeter"></div>
+                <div class="line2 two-meter2" id="2twoMeter"></div>
+                <div class="line2 six-meter2" id="2sixMeter"></div>
+                <div class="line2 two-meter3" id="3twoMeter"></div>
+                <div class="line2 six-meter3" id="3sixMeter"></div>
 
-                <div class="goal"></div>
+                <div class="goal" id="Ogoal"></div>
+                <div class="goal2 leftGoal" id="rGoal"></div>
+                <div class="goal2 rightGoal" id="lGoal"></div>
 
                 <!-- Team 1 Players -->
                 <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%"
                     data-start-left2="15.49%" data-start-top="13%" data-start-left="12%" data-start-left3="0.5%"
-                    data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="76%">1</div>
+                    data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="76%" data-start-full-top="80.28%" data-start-full-left="13.33%" data-start-half-top="13%" data-start-half-left="12%" data-start-top5="81.81%" data-start-left5="11.97%" data-start-left6="12%" data-start-top6="0%" data-start-top7="78.38%" data-start-left7="59.22%">1</div>
                 <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%"
                     data-start-left2="38.14%" data-start-top="35%" data-start-left="25%" data-start-left3="0.5%"
-                    data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="76%">2</div>
+                    data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="76%" data-start-full-top="66.38%" data-start-full-left="30.21%"  data-start-half-top="35%" data-start-half-left="25%" data-start-top5="58.02%" data-start-left5="11.66%" data-start-left6="18%" data-start-top6="0%" data-start-top7="63.59%" data-start-left7="59.38%">2</div>
                 <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
                     data-start-left2="57.62%" data-start-top="45%" data-start-left="50%" data-start-left3="0.5%"
-                    data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="76%">3</div>
+                    data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="76%" data-start-full-top="47.9%" data-start-full-left="40.16%"  data-start-half-top="45%" data-start-half-left="50%" data-start-top5="40.01%" data-start-left5="11.66%" data-start-left6="24%" data-start-top6="0%" data-start-top7="44.94%" data-start-left7="71.3%">3</div>
                 <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
                     data-start-left2="37%" data-start-top="35%" data-start-left="75%" data-start-left3="0.5%"
-                    data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="76%">4</div>
+                    data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="76%" data-start-full-top="26.59%" data-start-full-left="31%"  data-start-half-top="35%" data-start-half-left="75%" data-start-top5="57.37%" data-start-left5="32.07%" data-start-left6="30%" data-start-top6="0%" data-start-top7="28.43%" data-start-left7="59.53%">4</div>
                 <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
                     data-start-left2="58%" data-start-top="13%" data-start-left="88%" data-start-left3="0.5%"
-                    data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="76%">5</div>
+                    data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="76%" data-start-full-top="11.54%" data-start-full-left="12.48%"  data-start-half-top="13%" data-start-half-left="88%" data-start-top5="38.51%" data-start-left5="31.44%" data-start-left6="36%" data-start-top6="0%" data-start-top7="14.28%" data-start-left7="59.85%">5</div>
                 <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
                     data-start-left2="79.06%" data-start-top="20%" data-start-left="50%" data-start-left3="0.5%"
-                    data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="86%">6</div>
+                    data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="86%" data-start-full-top="48.46%" data-start-full-left="15.04%"  data-start-half-top="20%" data-start-half-left="50%" data-start-top5="15.78%" data-start-left5="11.5%" data-start-left6="42%" data-start-top6="0%" data-start-top7="45.37%" data-start-left7="59.85%">6</div>
 
                 <!-- Team 2 Players -->
                 <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
                     data-start-left2="47.27%" data-start-top="13%" data-start-left="18%" data-start-left3="94%"
-                    data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="16%">1</div>
+                    data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="16%" data-start-full-top="73.46%" data-start-full-left="11.84%"  data-start-half-top="13%" data-start-half-left="18%" data-start-top5="72.60%" data-start-left5="62.84%" data-start-left6="12%" data-start-top6="93%" data-start-top7="79.46%" data-start-left7="34.91%">1</div>
                 <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
                     data-start-left2="32.57%" data-start-top="32%" data-start-left="30%" data-start-left3="94%"
-                    data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="16%">2</div>
-                <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;" data-start-top2="11.77%"
+                    data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="16%" data-start-full-top="62.52%" data-start-full-left="24.72%"  data-start-half-top="32%" data-start-half-left="30%" data-start-top5="65.31%" data-start-left5="11.19%" data-start-left6="18%" data-start-top6="93%" data-start-top7="64.02%" data-start-left7="34.60%">2</div>
+                <div id="player3-team2" class="player team2" style="top: 38%; left: 50%;" data-start-top2="11.77%"
                     data-start-left2="63.61%" data-start-top="38%" data-start-left="50%" data-start-left3="94%"
-                    data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="16%">3</div>
-                <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
+                    data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="16%" data-start-full-top="47.94%"data-start-full-left="35%"  data-start-half-top="38%" data-start-half-left="50%" data-start-top5="51.58%" data-start-left5="11.35%" data-start-left6="24%" data-start-top6="93%" data-start-top7="46.01%" data-start-left7="21.89%">3</div>
+                <div id="player4-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
                     data-start-left2="57.67%" data-start-top="32%" data-start-left="70%" data-start-left3="94%"
-                    data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="16%">4</div>
+                    data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="16%" data-start-full-top="30.42%"data-start-full-left="25.68%"  data-start-half-top="32%" data-start-half-left="70%" data-start-top5=" 57.37%" data-start-left5="17%" data-start-left6="30%" data-start-top6="93%" data-start-top7="29.29%" data-start-left7="34.91%">4</div>
                 <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
                     data-start-left2="47.27%" data-start-top="13%" data-start-left="82%" data-start-left3="94%"
-                    data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="16%">5</div>
+                    data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="16%" data-start-full-top="19.77%" data-start-full-left="12.69%"  data-start-half-top="13%" data-start-half-left="82%" data-start-top5="39.79%" data-start-left5="17.31%" data-start-left6="36%" data-start-top6="93%" data-start-top7="14.28%" data-start-left7="35.23%">5</div>
                 <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
                     data-start-left2="37.62%" data-start-top="12%" data-start-left="50%" data-start-left3="94%"
-                    data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="10%">6</div>
+                    data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="10%" data-start-full-top="48.46%" data-start-full-left="9.28%"  data-start-half-top="12%" data-start-half-left="50%" data-start-top5="32.72%" data-start-left5="11.66%" data-start-left6="42%" data-start-top6="93%" data-start-top7="46.01%" data-start-left7="34.76%">6</div>
 
                 <!-- Ball and Goalie -->
-                <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%" data-start-left2="40%"
-                    data-start-top="50%" data-start-left="50%"></div>
+                <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%" data-start-left2="50%"
+                    data-start-top="50%" data-start-left="50%" data-start-full-top="50%" data-start-full-left="45%" data-start-half-top="50%" data-start-half-left="50%" data-start-top5="50%" data-start-left5="50%" data-start-left6="50%" data-start-top6="50%" data-start-left7="50%" data-start-top7="50%"></div>
                 <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%" data-start-left2="50%"
-                    data-start-top="0%" data-start-left="50%">G</div>
+                    data-start-top="0%" data-start-left="50%" data-start-full-top="50%" data-start-full-left="0%" data-start-half-top="0%" data-start-half-left="50%" data-start-top5="50%" data-start-left5="0%" data-start-left6="50%" data-start-top6="0%" data-start-left7="0%" data-start-top7="50%">G</div>
             </div>
 
             <div class="controls">
@@ -261,14 +270,155 @@
         </div>
     </div>
 </div>
-   
+<div id="positionDisplay">
+
+</div>
+
+
+
+<button id="positionExit" class="posExit">Exit</button>
 
 
  <script src="js/common.js"></script>
  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const posExit = document.getElementById('positionExit');
+    const posOpen = document.getElementById('positionButton');
+    const posTab = document.getElementById('positionDisplay');
+    const players = document.querySelectorAll('.player');
+    const tacticBoard = document.getElementById('tacticBoard'); // Make sure this element exists
+
+    if (!posExit || !posOpen || !posTab || !tacticBoard) {
+        console.error("One or more elements are missing from the DOM!");
+        return;
+    }
+
+    posTab.style.display = 'none';
+    posExit.style.display = 'none';
+
+    posExit.addEventListener('click', () => {
+        posTab.style.display = 'none';
+        posExit.style.display = 'none';
+    });
+
+    posOpen.addEventListener('click', () => {
+        posTab.style.display = 'block';
+        posExit.style.display = 'block';
+    });
+
+    function getCurrentPosition(player) {
+        const rect = player.getBoundingClientRect();
+        const containerRect = tacticBoard.getBoundingClientRect();
+
+        return {
+            top: ((rect.top - containerRect.top) / containerRect.height) * 100,
+            left: ((rect.left - containerRect.left) / containerRect.width) * 100
+        };
+    }
+
+    function updatePlayerPositions() {
+        const playerPositions = [];
+
+        players.forEach((player, index) => {
+            const currentPosition = getCurrentPosition(player);
+            playerPositions.push({
+                player: `player${index}`,
+                top: currentPosition.top.toFixed(2),
+                left: currentPosition.left.toFixed(2)
+            });
+        });
+
+        posTab.textContent = JSON.stringify(playerPositions, null, 2);
+    }
+
+    // Update player positions every second instead of infinite loop
+    setInterval(updatePlayerPositions, 1000);
+});
+
 localStorage.removeItem('playData');
 
+let currentCourtMode = 'half';
 
+// Replace previous full court button with this toggle logic
+const courtModeButton = document.getElementById('courtModeButton');
+courtModeButton.addEventListener('click', toggleCourtMode);
+
+function toggleCourtMode() {
+    const board = document.getElementById('tacticBoard');
+    board.classList.toggle('full-court', currentCourtMode === 'full');
+    currentCourtMode = currentCourtMode === 'half' ? 'full' : 'half';
+    updateCourtModeButton();
+    positionPlayersForCurrentMode();
+    resetCanvas();
+   
+}
+
+function updateCourtModeButton() {
+    const isFull = currentCourtMode === 'full';
+    courtModeButton.textContent = isFull ? 'Switch to Half Court' : 'Switch to Full Court';
+    courtModeButton.className = isFull ? 'court-mode-full' : 'court-mode-half';
+}
+let positionType;
+function positionPlayersForCurrentMode() {
+     positionType = currentCourtMode === 'full' ? 'full' : 'half';
+    
+if (positionType=='full'){
+    document.getElementById('1twoMeter').style.display = 'none';
+    document.getElementById('1sixMeter').style.display = 'none';
+    document.getElementById('Ogoal').style.display = 'none';
+
+    document.getElementById('2twoMeter').style.display = 'block';
+    document.getElementById('2sixMeter').style.display = 'block';
+    document.getElementById('lGoal').style.display = 'block';
+
+    document.getElementById('3twoMeter').style.display = 'block';
+    document.getElementById('3sixMeter').style.display = 'block';
+    document.getElementById('rGoal').style.display = 'block';
+
+
+} else {
+
+    document.getElementById('1twoMeter').style.display = 'block';
+    document.getElementById('1sixMeter').style.display = 'block';
+    document.getElementById('Ogoal').style.display = 'block';
+
+    document.getElementById('2twoMeter').style.display = 'none';
+    document.getElementById('2sixMeter').style.display = 'none';
+    document.getElementById('lGoal').style.display = 'none';
+
+    document.getElementById('3twoMeter').style.display = 'none';
+    document.getElementById('3sixMeter').style.display = 'none';
+    document.getElementById('rGoal').style.display = 'none';
+
+
+
+
+
+}
+
+    elements.forEach(element => {
+        const startTop = element.getAttribute(`data-start-${positionType}-top`);
+        const startLeft = element.getAttribute(`data-start-${positionType}-left`);
+        
+        if (startTop && startLeft) {
+            element.style.top = startTop;
+            element.style.left = startLeft;
+        }
+        element.style.opacity = 1;
+    });
+    
+}
+
+function resetCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    lines = [];
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateCourtModeButton();
+    positionPlayersForCurrentMode();
+  
+});
     // Initialize first tab as active
     document.getElementById('whiteboard').classList.add('active');
     document.getElementById('playbook').classList.remove('active');
@@ -284,14 +434,23 @@ document.getElementById("playbook").addEventListener("click", () => {
         // Modify the "6-on-6" button functionality
         const sixOnSixButton = document.getElementById('sixOnSixButton'); // Use the existing button
         sixOnSixButton.addEventListener('click', () => {
-            elements.forEach(element => {
-                // Restore the positions from the data attributes
-                const startTop = element.getAttribute('data-start-top');
-                const startLeft = element.getAttribute('data-start-left');
+            updateCourtModeButton();
 
-                if (startTop && startLeft) {
+            elements.forEach(element => {
+
+                // Restore the positions from the data attributes
+              const   startTop = element.getAttribute(`data-start-${positionType}-top`);
+             const    startLeft = element.getAttribute(`data-start-${positionType}-left`);
+               
+             console.log("positionType:", positionType);
+
+                if (startTop && startLeft && positionType) {
                     element.style.top = startTop;
                     element.style.left = startLeft;
+                }
+                else{
+console.log(startTop)
+                   
                 }
 
                 // Ensure all players (even the previously hidden ones) are visible
@@ -304,37 +463,51 @@ document.getElementById("playbook").addEventListener("click", () => {
         });
 
         const sidelines = document.getElementById('sidelines'); // Use the existing button
-        sidelines.addEventListener('click', () => {
-            elements.forEach(element => {
-                // Restore the positions from the data attributes
-                const startTop = element.getAttribute('data-start-top3');
-                const startLeft = element.getAttribute('data-start-left3');
+sidelines.addEventListener('click', () => {
+    elements.forEach(element => {
+        // Restore the positions from the data attributes
+        let startTop2, startLeft2;
+        if (positionType === 'full') {
+            startTop2 = element.getAttribute('data-start-top6');
+            startLeft2 = element.getAttribute('data-start-left6');
+        } else {
+            startTop2 = element.getAttribute('data-start-top3');
+            startLeft2 = element.getAttribute('data-start-left3');
+        }
 
-                if (startTop && startLeft) {
-                    element.style.top = startTop;
-                    element.style.left = startLeft;
-                }
+        if (startTop2 && startLeft2) {
+            // Use the correct variable names here
+            element.style.top = startTop2;
+            element.style.left = startLeft2;
+        }
 
-                // Ensure all players (even the previously hidden ones) are visible
-                element.style.opacity = 1;
-            });
+        // Ensure all players (even the previously hidden ones) are visible
+        element.style.opacity = 1;
+    });
 
-            // Clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            lines = [];
-        });
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    lines = [];
+});
+
 
         const counter = document.getElementById('counter'); // Use the existing button
         counter.addEventListener('click', () => {
             elements.forEach(element => {
-                // Restore the positions from the data attributes
-                const startTop = element.getAttribute('data-start-top4');
-                const startLeft = element.getAttribute('data-start-left4');
+                let startTop2, startLeft2;
+        if (positionType === 'full') {
+            startTop2 = element.getAttribute('data-start-top7');
+            startLeft2 = element.getAttribute('data-start-left7');
+        } else {
+            startTop2 = element.getAttribute('data-start-top4');
+            startLeft2 = element.getAttribute('data-start-left4');
+        }
 
-                if (startTop && startLeft) {
-                    element.style.top = startTop;
-                    element.style.left = startLeft;
-                }
+        if (startTop2 && startLeft2) {
+            // Use the correct variable names here
+            element.style.top = startTop2;
+            element.style.left = startLeft2;
+        }
 
                 // Ensure all players (even the previously hidden ones) are visible
                 element.style.opacity = 1;
@@ -388,32 +561,51 @@ document.getElementById("playbook").addEventListener("click", () => {
         const elements = document.querySelectorAll('.player, .ball, .goalie');
 
         const sixOnFiveButton = document.getElementById('sixOnFiveButton');
-        const team2Players = document.querySelectorAll('.player.team2');
-        sixOnFiveButton.addEventListener('click', () => {
-            // Eject one player from team2 (example: first player of team2)
-            if (team2Players.length > 0) {
-                const firstPlayer = team2Players[0];
-                firstPlayer.style.opacity = 0; // Hide the player
-            }
+const team2Players = document.querySelectorAll('.player.team2');
 
-            // Restore the positions of all players (including team1 and team2)
-            elements.forEach(element => {
-                // Fetch the new starting positions from the data attributes for the '6-on-5' play
-                const startTop2 = element.getAttribute('data-start-top2');
-                const startLeft2 = element.getAttribute('data-start-left2');
+sixOnFiveButton.addEventListener('click', () => {
+    // Eject one player from team2 (example: first player of team2)
+    if (team2Players.length > 0) {
+        const firstPlayer = team2Players[0];
+        firstPlayer.style.opacity = 0; // Hide the player
+    }
 
-                if (startTop2 && startLeft2) {
-                    // Set the positions based on the new data attributes
-                    element.style.top = startTop2;
-                    element.style.left = startLeft2;
-                    element.style.display = ''; // Ensure element is visible if hidden
-                }
-            });
+    // Restore the positions of all players (including team1 and team2)
+    elements.forEach(element => {
+        // Declare the variables in the outer scope
+        let startTop2, startLeft2;
+        
+        // Fetch the new starting positions based on the current positionType
+        if (positionType === 'full') {
+            startTop2 = element.getAttribute('data-start-top5');
+            startLeft2 = element.getAttribute('data-start-left5');
+        } else {
+            startTop2 = element.getAttribute('data-start-top2');
+            startLeft2 = element.getAttribute('data-start-left2');
+        }
 
-            // Clear the canvas for new tactical drawing
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            lines = []; // Reset the lines array
-        });
+        if (startTop2 && startLeft2 && positionType) {
+            // Set the positions based on the new data attributes
+            element.style.top = startTop2;
+            element.style.left = startLeft2;
+            element.offsetWidth;
+            element.style.display = ''; 
+            console.log(startTop2)
+            console.log(startLeft2)
+            console.log(positionType)// Ensure element is visible if hidden
+        }
+        else{
+
+            console.log(startTop2)
+            console.log(positionType)
+        }
+    });
+
+    // Clear the canvas for new tactical drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    lines = []; // Reset the lines array
+});
+
 
         document.getElementById('exportPlay').addEventListener('click', exportPlay);
         document.getElementById('importInput').addEventListener('change', (e) => {
@@ -427,6 +619,7 @@ document.getElementById("playbook").addEventListener("click", () => {
             const data = JSON.stringify({
                 version: "1.0",
                 steps: steps,
+                courtMode: currentCourtMode,
                 offsets: { x: POSITION_OFFSET_X, y: POSITION_OFFSET_Y }
             }, null, 2);
 
@@ -442,46 +635,55 @@ document.getElementById("playbook").addEventListener("click", () => {
         }
 
         function importPlay(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const data = JSON.parse(e.target.result);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
 
-                    // Validate file structure
-                    if (!data.steps || !Array.isArray(data.steps)) {
-                        throw new Error('Invalid file format');
-                    }
+            // Validate file structure
+            if (!data.steps || !Array.isArray(data.steps)) {
+                throw new Error('Invalid file format');
+            }
 
-                    // Clear current steps
-                    steps = [];
+            // Clear current steps
+            steps = [];
 
-                    // Load steps with image reviver
-                    data.steps.forEach(step => {
-                        // Create new step object
-                        const newStep = {
-                            ...step,
-                            // Convert screenshot data to blob if needed
-                            screenshot: step.screenshot.startsWith('blob:') ?
-                                step.screenshot :
-                                `data:image/png;base64,${step.screenshot}`
-                        };
+            // Load steps with image reviver
+            data.steps.forEach(step => {
+                // Create new step object
+                const newStep = {
+                    ...step,
+                    // Preserve existing blob/data URLs, convert raw base64
+                    screenshot: (step.screenshot.startsWith('blob:') || 
+                                step.screenshot.startsWith('data:')) ?
+                        step.screenshot :
+                        `data:image/png;base64,${step.screenshot}`
+                };
 
-                        steps.push(newStep);
-                    });
+                steps.push(newStep);
+            });
 
-                    if (data.offsets) {
-                        POSITION_OFFSET_X = data.offsets.x;
-                        POSITION_OFFSET_Y = data.offsets.y;
-                    }
+            if (data.courtMode) {
+                currentCourtMode = data.courtMode;
+                const board = document.getElementById('tacticBoard');
+                board.classList.toggle('full-court', currentCourtMode === 'full');
+                updateCourtModeButton();
+                positionPlayersForCurrentMode();
+            }
 
-                    updateTimeline();
-                    alert('Play imported successfully!');
-                } catch (error) {
-                    alert('Error importing play: ' + error.message);
-                }
-            };
-            reader.readAsText(file);
+            if (data.offsets) {
+                POSITION_OFFSET_X = data.offsets.x;
+                POSITION_OFFSET_Y = data.offsets.y;
+            }
+
+            updateTimeline();
+            alert('Play imported successfully!');
+        } catch (error) {
+            alert('Error importing play: ' + error.message);
         }
+    };
+    reader.readAsText(file);
+}
 
         let steps = [];
         let isAnimating = false;
@@ -580,7 +782,10 @@ document.getElementById("playbook").addEventListener("click", () => {
 
         // Save/Load System
         document.getElementById('savePlay').addEventListener('click', () => {
-            const data = JSON.stringify(steps);
+            const data = JSON.stringify({
+        steps: steps,
+        courtMode: currentCourtMode
+    });
             localStorage.setItem('savedPlay', data);
             alert('Play saved successfully!');
         });
@@ -588,12 +793,30 @@ document.getElementById("playbook").addEventListener("click", () => {
         document.getElementById('loadPlay').addEventListener('click', () => {
             const data = localStorage.getItem('savedPlay');
             if (data) {
-                steps = JSON.parse(data);
-                updateTimeline();
-                alert('Play loaded successfully!');
+        try {
+            const parsed = JSON.parse(data);
+            
+            // Handle legacy saves that were just the array
+            if (Array.isArray(parsed)) {
+                steps = parsed;
             } else {
-                alert('No saved play found!');
+                steps = parsed.steps;
+                if (parsed.courtMode) {
+                    currentCourtMode = parsed.courtMode;
+                    const board = document.getElementById('tacticBoard');
+                    board.classList.toggle('full-court', currentCourtMode === 'full');
+                    updateCourtModeButton();
+                    positionPlayersForCurrentMode();
+                }
             }
+            updateTimeline();
+            alert('Play loaded successfully!');
+        } catch (e) {
+            alert('Error loading play: ' + e.message);
+        }
+    } else {
+        alert('No saved play found!');
+    }
         });
 
         // Animation System
