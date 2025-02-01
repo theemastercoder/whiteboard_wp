@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" type="" href="/favicon.ico">
+  <link rel="icon" type="" href="favicon.ico">
   <link rel="stylesheet" type="text/css" href="common.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Water Polo Tactic Board Pro</title>
 
   <!-- Include the library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.min.js"></script>
+
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 
@@ -23,6 +23,27 @@
   height:100%;
 
 }
+.playselectedBottom{
+  width: 60%;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+}
+.timeline{
+
+  width: 600%;
+}
+#playAnimationButton2{
+
+
+  width: 50%;
+}
+.speed-control{
+
+
+  width:50%;
+}
+
+
 
 
 
@@ -107,67 +128,113 @@
       <button class="tab-button" data-tab="playbook" id="playbook">Playbook</button>
       <button class="tab-button" data-tab="Back" id="Back">Back</button>
     </nav>
+
+    
 </div>
+
 
     <div class="playSelectcontent">
       <div class="tactic-board" id="tacticBoard">
         <canvas id="drawingCanvas"></canvas>
-        <div class="line two-meter"></div>
-        <div class="line six-meter"></div>
+        <div class="line two-meter" id="1twoMeter"></div>
+                <div class="line six-meter" id="1sixMeter"></div>
+                <div class="line2 two-meter2" id="2twoMeter"></div>
+                <div class="line2 six-meter2" id="2sixMeter"></div>
+                <div class="line2 two-meter3" id="3twoMeter"></div>
+                <div class="line2 six-meter3" id="3sixMeter"></div>
 
-        <div class="goal"></div>
+                <div class="goal" id="Ogoal"></div>
+                <div class="goal2 leftGoal" id="rGoal"></div>
+                <div class="goal2 rightGoal" id="lGoal"></div>
 
         <!-- Team 1 Players -->
-        <div id="player1-team1" class="player team1" style="top: 13%; left: 12%;" data-start-top2="11.77%"
-          data-start-left2="15.49%" data-start-top="13%" data-start-left="12%" data-start-left3="0.5%"
-          data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="76%">1</div>
-        <div id="player2-team1" class="player team1" style="top: 35%; left: 25%;" data-start-top2="12.5%"
-          data-start-left2="38.14%" data-start-top="35%" data-start-left="25%" data-start-left3="0.5%"
-          data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="76%">2</div>
-        <div id="player3-team1" class="player team1" style="top: 45%; left: 50%;" data-start-top2="11.77%"
-          data-start-left2="57.62%" data-start-top="45%" data-start-left="50%" data-start-left3="0.5%"
-          data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="76%">3</div>
-        <div id="player4-team1" class="player team1" style="top: 35%; left: 75%;" data-start-top2="37%"
-          data-start-left2="37%" data-start-top="35%" data-start-left="75%" data-start-left3="0.5%"
-          data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="76%">4</div>
-        <div id="player5-team1" class="player team1" style="top: 13%; left: 88%;" data-start-top2="37%"
-          data-start-left2="58%" data-start-top="13%" data-start-left="88%" data-start-left3="0.5%"
-          data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="76%">5</div>
-        <div id="player6-team1" class="player team1" style="top: 20%; left: 50%;" data-start-top2="11.77%"
-          data-start-left2="79.06%" data-start-top="20%" data-start-left="50%" data-start-left3="0.5%"
-          data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="86%">6</div>
+        <div id="player1-team1" class="player team1" style="top: 41%; left: 0.5%;" >1</div>
+        <div id="player2-team1" class="player team1" style="top: 48%; left: 0.5%;" >2</div>
+        <div id="player3-team1" class="player team1" style="top: 55%; left: 0.5%;" >3</div>
+        <div id="player4-team1" class="player team1" style="top: 62%; left: 0.5%;" >4</div>
+        <div id="player5-team1" class="player team1" style="top: 69%; left: 0.5%;" >5</div>
+        <div id="player6-team1" class="player team1" style="top: 76%; left: 0.5%;" >6</div>
 
         <!-- Team 2 Players -->
-        <div id="player1-team2" class="player team2" style="top: 13%; left: 18%;" data-start-top2="11.77%"
-          data-start-left2="47.27%" data-start-top="13%" data-start-left="18%" data-start-left3="94%"
-          data-start-top3="41.36%" data-start-left4="14.74%" data-start-top4="16%">1</div>
-        <div id="player2-team2" class="player team2" style="top: 32%; left: 30%;" data-start-top2="12.5%"
-          data-start-left2="32.57%" data-start-top="32%" data-start-left="30%" data-start-left3="94%"
-          data-start-top3="48.48%" data-start-left4="27.07%" data-start-top4="16%">2</div>
-        <div id="player4-team2" class="player team2" style="top: 38%; left: 50%;" data-start-top2="11.77%"
-          data-start-left2="63.61%" data-start-top="38%" data-start-left="50%" data-start-left3="94%"
-          data-start-top3="55.41%" data-start-left4="47.27%" data-start-top4="16%">3</div>
-        <div id="player3-team2" class="player team2" style="top: 32%; left: 70%;" data-start-top2="17.31%"
-          data-start-left2="57.67%" data-start-top="32%" data-start-left="70%" data-start-left3="94%"
-          data-start-top3="62.54%" data-start-left4="59.60%" data-start-top4="16%">4</div>
-        <div id="player5-team2" class="player team2" style="top: 13%; left: 82%;" data-start-top2="11.77%"
-          data-start-left2="47.27%" data-start-top="13%" data-start-left="82%" data-start-left3="94%"
-          data-start-top3="69.07%" data-start-left4="78.32%" data-start-top4="16%">5</div>
-        <div id="player6-team2" class="player team2" style="top: 12%; left: 50%;" data-start-top2="19.68%"
-          data-start-left2="37.62%" data-start-top="12%" data-start-left="50%" data-start-left3="94%"
-          data-start-top3="75.40%" data-start-left4="47.27%" data-start-top4="10%">6</div>
+        <div id="player1-team2" class="player team2" style="top: 41%; left: 94%;" >1</div>
+        <div id="player2-team2" class="player team2" style="top: 48%; left: 94%;" >2</div>
+        <div id="player4-team2" class="player team2" style="top: 55%; left: 94%;" >3</div>
+        <div id="player3-team2" class="player team2" style="top: 62%; left: 94%;" >4</div>
+        <div id="player5-team2" class="player team2" style="top: 69%; left: 94%;" >5</div>
+        <div id="player6-team2" class="player team2" style="top: 76%; left: 94%;" >6</div>
 
         <!-- Ball and Goalie -->
-        <div id="ball" class="ball" style="top: 50%; left: 50%;" data-start-top2="40%" data-start-left2="40%"
-          data-start-top="50%" data-start-left="50%"></div>
-        <div id="goalie" class="goalie" style="top: 0%; left: 50%;" data-start-top2="0%" data-start-left2="50%"
-          data-start-top="0%" data-start-left="50%">G</div>
+        <div id="ball" class="ball" style="top: 50%; left: 50%;"></div>
+        <div id="goalie" class="goalie" style="top: 0%; left: 50%;">G</div>
       </div>
-<button id ="playAnimationButton">Play</button>
-    </div>
+<div class ="playselectedBottom">
+<button id ="playAnimationButton2">Play</button>
+<div class="speed-control">
+  <label>Speed:</label>
+  <input type="range" id="animationSpeed2" min="0.5" max="3" step="0.5" value="1">
+  <span id="speedValue2">1x</span>
+</div>
+  
+    <div class="timeline" id="timeline"></div>
+
+        <div class="step-previews" id="stepPreviews"></div>
+      </div>
     <script>
       // Tab Switching Logic
 
+      let currentCourtMode = 'half';
+
+// Replace previous full court button with this toggle logic
+
+
+function updateCourtModeButton() {
+    const isFull = currentCourtMode === 'full';
+    
+}
+let positionType;
+function positionPlayersForCurrentMode() {
+     positionType = currentCourtMode === 'full' ? 'full' : 'half';
+    
+if (positionType=='full'){
+    document.getElementById('1twoMeter').style.display = 'none';
+    document.getElementById('1sixMeter').style.display = 'none';
+    document.getElementById('Ogoal').style.display = 'none';
+
+    document.getElementById('2twoMeter').style.display = 'block';
+    document.getElementById('2sixMeter').style.display = 'block';
+    document.getElementById('lGoal').style.display = 'block';
+
+    document.getElementById('3twoMeter').style.display = 'block';
+    document.getElementById('3sixMeter').style.display = 'block';
+    document.getElementById('rGoal').style.display = 'block';
+
+
+} else {
+
+    document.getElementById('1twoMeter').style.display = 'block';
+    document.getElementById('1sixMeter').style.display = 'block';
+    document.getElementById('Ogoal').style.display = 'block';
+
+    document.getElementById('2twoMeter').style.display = 'none';
+    document.getElementById('2sixMeter').style.display = 'none';
+    document.getElementById('lGoal').style.display = 'none';
+
+    document.getElementById('3twoMeter').style.display = 'none';
+    document.getElementById('3sixMeter').style.display = 'none';
+    document.getElementById('rGoal').style.display = 'none';
+
+
+
+
+
+}
+
+}
+document.addEventListener('DOMContentLoaded', () => {
+    updateCourtModeButton();
+    positionPlayersForCurrentMode();
+  
+});
 
       // Initialize first tab as active
 
@@ -250,15 +317,34 @@
             return;
         }
 
-        const newStep = { ...step };
+        const newStep = { ...step,
+
+          screenshot: (step.screenshot.startsWith('blob:') || 
+                                step.screenshot.startsWith('data:')) ?
+                        step.screenshot :
+                        `data:image/png;base64,${step.screenshot}`
+                };
+         
         steps.push(newStep);
 
         console.log(`Step ${index} loaded:`, newStep);
+       
     });
 
     console.log("All steps loaded:", steps);
 
     // Load position offsets if available
+    if (data.courtMode) {
+                currentCourtMode = data.courtMode;
+                const board = document.getElementById('tacticBoard');
+                board.classList.toggle('full-court', currentCourtMode === 'full');
+                updateCourtModeButton();
+                positionPlayersForCurrentMode();
+            }
+      else{
+        console.log("No court mode found");
+
+      }
     if (data.offsets) {
         if (typeof data.offsets.x === "number" && typeof data.offsets.y === "number") {
             POSITION_OFFSET_X = data.offsets.x;
@@ -272,11 +358,53 @@
     }
 
     console.log("Play data successfully loaded!");
+    updateTimeline();
 });
 
 
+function updateTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            steps.forEach((step, index) => {
+                const stepBlock = document.createElement('div');
+                stepBlock.className = 'step-block';
+
+                // Step text and controls
+                const stepContent = document.createElement('div');
+                stepContent.innerHTML = `
+            ${step.name}
+            <div class="step-controls">
+                
+        `;
+
+                // Screenshot image
+                const screenshotImage = document.createElement('img');
+                screenshotImage.className = 'step-screenshot';
+                screenshotImage.src = step.screenshot;
+                screenshotImage.alt = `Step ${index + 1} Screenshot`;
+
+                // Append step content and screenshot to the step block
+                stepBlock.appendChild(stepContent);
+                stepBlock.appendChild(screenshotImage);
+
+                // Add click event to jump to the step
+                stepBlock.addEventListener('click', () => jumpToStep(index));
+
+                // Append the step block to the timeline
+                timeline.appendChild(stepBlock);
+            });
+        }
+        // Initialize
+        updateTimeline();
+
+document.getElementById('animationSpeed2').addEventListener('input', (e) => {
+            animationSpeed = e.target.value;
+            document.getElementById('speedValue2').textContent = `${animationSpeed}x`;
+        });
+
         // Animation System
-        document.getElementById('playAnimationButton').addEventListener('click', async () => {
+        document.getElementById('playAnimationButton2').addEventListener('click', async () => {
             if (!isAnimating) {
               if (steps.length === 0) {
             alert("No steps available to animate!");
