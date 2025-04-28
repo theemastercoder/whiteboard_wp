@@ -18,9 +18,7 @@
 .playcontainer{
 
 text-align: center;
-
-
-    color: antiquewhite;
+color: antiquewhite;
     
 }
 
@@ -39,6 +37,16 @@ font-family: Arial, Helvetica, sans-serif;
     width:100%;
 }
 
+
+#filters{
+font-family: 'Courier New', Courier, monospace;
+font-size: 2vw;
+
+color:azure;
+
+
+
+}
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columns adjust to min 250px */
@@ -137,37 +145,187 @@ font-family: Arial, Helvetica, sans-serif;
         <nav class="tab-nav">
             <button class="tab-button active" data-tab="whiteboard" id="whiteboard">Whiteboard</button>
             <button class="tab-button" data-tab="playbook" id="playbook">Playbook</button>
+            <button class="tab-button" data-tab="clock" id="clock">
+              Clock
+            </button>
         </nav>
     
 </div>
+<input type="text" id="filter-search" placeholder="Search plays..." />
+
+<div id="filters">
+  <label>
+    Player Num:
+    <select id="filter-playerNum">
+      <option value="">All</option>
+      <option value="6-5">6-5</option>
+      <option value="6-6">6-6</option>
+    </select>
+  </label>
+
+  <label>
+    Off/Def:
+    <select id="filter-offDef">
+      <option value="">All</option>
+      <option value="off">Offense</option>
+      <option value="def">Defense</option>
+    </select>
+  </label>
+
+  <label>
+    Drill:
+    <select id="filter-drill">
+      <option value="">All</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+  </label>
+
+ 
+</div>
+
 <div class="grid-container">
 
-    <div class="playcontainer" data-play="1">
-        <p class="play-text" id="play1">Play 1</p>
-        <img src="Playbook_images/play1.png" class="play-img" id="play1">
+    <div class="playcontainer"  id="play1" playerNum="6-5" offDef="off" drill="no">
+        <p class="play-text" >Post pop right</p>
+        <img src="Playbook_images/play1.png" class="play-img" >
     </div>
     
-    <div class="playcontainer" data-play="2">
-      <p class="play-text" id="play2">Play 2</p>
-      <img src="Playbook_images/play1.png" class="play-img" id="play2">
+    <div class="playcontainer" id="play2" playerNum="6-5" offDef="off" drill="no" passing="no" shooting="no">
+      <p class="play-text" >Post pop left</p>
+      <img src="Playbook_images/play1.png" class="play-img" >
   </div>
 
-    <div class="playcontainer" data-play="3">
-        <p class="play-text" id="play3">Play 3</p>
-        <img src="Playbook_images/play1.png" class="play-img" id="play3">
+    <div class="playcontainer" id="play3" playerNum="6-6" offDef="off" drill="yes" passing="no" shooting="no">
+        <p class="play-text" >Drive balance around</p>
+        <img src="Playbook_images/play1.png" class="play-img">
     </div>
     
-    <div class="playcontainer" data-play="4">
-      <p class="play-text" id="play4">Play 4</p>
-      <img src="Playbook_images/play1.png" class="play-img" id="play4">
+    <div class="playcontainer" id="play4" playerNum="6-6" offDef="def" drill="no" passing="no" shooting="no">
+      <p class="play-text" >3-4 drop</p>
+      <img src="Playbook_images/play1.png" class="play-img" >
   </div>
+
+
+
+<div class="playcontainer" id="play6" playerNum="6-6" offDef="def" drill="no" passing="no" shooting="no">
+  <p class="play-text" >4-5 drop</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play7" playerNum="6-6" offDef="def" drill="no" passing="no" shooting="no">
+  <p class="play-text" >3-4-5 drop</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play8" playerNum="6-6" offDef="def" drill="no" passing="no" shooting="no">
+  <p class="play-text" >M split defense</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play9" playerNum="6-6" offDef="off" drill="no" passing="no" shooting="no">
+  <p class="play-text" >M split offense</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play10" playerNum="6-5" offDef="off" drill="no" passing="no" shooting="no">
+  <p class="play-text" >Rotate 6-5</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play11" playerNum="6-5" offDef="def" drill="no" passing="no" shooting="no">
+  <p class="play-text" >Counter rotate 6-5</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play12" playerNum="6-6" offDef="off" drill="no" passing="no" shooting="no">
+  <p class="play-text" >3-4 drop offense</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play13" playerNum="6-6" offDef="off" drill="no" passing="no" shooting="no">
+  <p class="play-text" >3-4-5 drop offense</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play14" playerNum="6-6" offDef="off" drill="no" passing="no" shooting="no">
+  <p class="play-text" >4-5 drop offense</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+<div class="playcontainer" id="play15" playerNum="6-6" offDef="off" drill="no" passing="no" shooting="no">
+  <p class="play-text" >M split offense</p>
+  <img src="Playbook_images/play1.png" class="play-img" >
+</div>
+
+
+
+
+
+
+
+
     
+
 </div>
 
 
 
     <script>
  // Tab Switching Logic
+ const filters = {
+    playerNum: '',
+    offDef: '',
+    drill: '',
+    passing: '',
+    shooting: '',
+    search: ''
+  };
+
+  const playContainers = document.querySelectorAll('.playcontainer');
+
+  function applyFilters() {
+    playContainers.forEach(play => {
+      let visible = true;
+
+      // Check attribute-based filters
+      for (let key of ['playerNum', 'offDef', 'drill', 'passing', 'shooting']) {
+        const filterValue = filters[key];
+        const attrValue = play.getAttribute(key);
+        if (filterValue && attrValue !== filterValue) {
+          visible = false;
+          break;
+        }
+      }
+
+      // Check search text
+      if (visible && filters.search) {
+        const text = play.querySelector('.play-text')?.textContent.toLowerCase() || '';
+        if (!text.includes(filters.search.toLowerCase())) {
+          visible = false;
+        }
+      }
+
+      play.style.display = visible ? 'block' : 'none';
+    });
+  }
+
+  // Handle dropdown filters
+  document.querySelectorAll('#filters select').forEach(select => {
+    select.addEventListener('change', () => {
+      filters[select.id.replace('filter-', '')] = select.value;
+      applyFilters();
+    });
+  });
+
+  // Handle search input
+  document.getElementById('filter-search').addEventListener('input', (e) => {
+    filters.search = e.target.value;
+    applyFilters();
+  });
+
+  // Initial filter
+  applyFilters();
 
  localStorage.removeItem('playData');
 
@@ -182,15 +340,15 @@ document.getElementById("playbook").addEventListener("click", () => {
   window.location.href = "playbook.html"; // Redirect to home.html
 });
 
+document.getElementById("clock").addEventListener("click", () => {
+  window.location.href = "clock.html"; // Redirect to home.html
+});
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-play]').forEach(container => {
-        container.addEventListener('click', () => {
 
-    
 
-  
-          let Data = {
+document.getElementById("play1").addEventListener("click", () => {
+
+  let Data = {
   "version": "1.0",
   "steps": [
     {
@@ -520,15 +678,34 @@ document.addEventListener('DOMContentLoaded', () => {
     "y": 0
   }
 };
-
-  localStorage.setItem('playData3', JSON.stringify(Data));
-  window.location.href = "playSelected.html"; // Redirect to home.html
-
-            
-        });
-    });
+  
+localStorage.setItem('playData3', JSON.stringify(Data));
+  window.location.href = "playSelected.html"; // Redirect to home.html// Redirect to home.html
 });
 
+document.getElementById("play2").addEventListener("click", () => {
+
+
+
+  localStorage.setItem('playData3', JSON.stringify(Data));
+  window.location.href = "playSelected.html"; // Redirect to home.html // Redirect to home.html
+});
+
+document.getElementById("play3").addEventListener("click", () => {
+
+
+  localStorage.setItem('playData3', JSON.stringify(Data));
+  window.location.href = "playSelected.html"; // Redirect to home.html // Redirect to home.html
+});
+
+
+document.getElementById("play4").addEventListener("click", () => {
+
+
+
+  localStorage.setItem('playData3', JSON.stringify(Data));
+  window.location.href = "playSelected.html"; // Redirect to home.html/ Redirect to home.html
+});
 
 
     </script>
